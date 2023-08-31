@@ -20,7 +20,7 @@
   - [Letter Names](#letter-names)
   - [Numbers](#numbers)
 - [Character Substitution](#character-substitution)
-- [(Re)definition of charater groups](#redefinition-of-charater-groups)
+- [(Re)definition of character groups](#redefinition-of-character-groups)
 
 ----------
 
@@ -219,9 +219,9 @@ translation rules and spoken with English phonemes.
 |-------------|-------------|
 | `_`         | Beginning or end of a word (or a hyphen). |
 | `-`         | Hyphen. |
-| `A`         | Any vowel[<sup>1</sup>](#redefinition-of-charater-groups). |
-| `C`         | Any consonant [<sup>1</sup>](#redefinition-of-charater-groups). |
-| `B H F G Y` | These may indicate other sets of characters[<sup>1</sup>](#redefinition-of-charater-groups). |
+| `A`         | Any vowel[<sup>1</sup>](#redefinition-of-character-groups). |
+| `C`         | Any consonant [<sup>1</sup>](#redefinition-of-character-groups). |
+| `B H F G Y` | These may indicate other sets of characters[<sup>1</sup>](#redefinition-of-character-groups). |
 | `L<nn>`     | Any of the sequence of characters defined as a letter grup. |
 | `D`         | Any digit. |
 | `K`         | Not a vowel (i.e. a consonant or word boundary or non-alphabetic character). |
@@ -392,8 +392,8 @@ instead of, or as well as, the phonetic translation.
 | `$u2`                | The word is unstressed, with a slight stress on its 2nd syllable. |
 | `$u3`                | The word is unstressed, with a slight stress on its 3rd syllable. |
 | `$u+ $u1+ $u2+ $u3+` | As above, but the word has full stress if it's at the end of a clause. |
-| `$pause`             | Ensure a short pause before this word (eg. for conjunctions such as "and", some prepositions, etc). |
-| `$brk`               | Ensure a very short pause before this word, shorter than $pause (eg. for some prepositions, etc). |
+| `$pause`             | Ensure a short pause before this word (eg. for conjunctions such as "and", some prepositions, etc). Does not apply for 1st, 2nd or last word of a sentence. |
+| `$brk`               | Ensure a very short pause before this word, shorter than $pause (eg. for some prepositions, etc). Does not apply for the last word of a sentence. |
 | `$only`              | The rule does not apply if a prefix or suffix has already been removed. |
 | `$onlys`             | As `$only`, except that a standard  plural ending is allowed. |
 | `$stem`              | The rule only applies if a suffix has already been removed (i.e. word had to have suffix before). |
@@ -410,12 +410,12 @@ instead of, or as well as, the phonetic translation.
 | `$text`              | Word translates to replacement text, not phonemes.|
 | `$verbf`             | The following word is probably a verb. |
 | `$verbsf`            | The following word is probably a verb if it has an "s" suffix. |
-| `$nounf`             | The following word is probably not a verb. |
+| `$nounf`             | The following word is probably a noun. |
 | `$pastf`             | The following word is probably past tense. |
 | `$verb`              | Use this pronunciation if it's a verb, i.e. previously processed word had `$verbf` or `$verbsf` set.|
 | `$noun`              | Use this pronunciation if it's a noun, i.e. previously processed word had `$nounf` set.|
 | `$past`              | Use this pronunciation if it's past tense, i.e. previously processed word had `$pastf` set.|
-| `$verbextend`        | Extend the influence of `$verbf` and `$verbsf`. |
+| `$verbextend`        | Extend the influence of `$verbf` and `$verbsf` until  a word with $verb or $nounf is encountered. |
 | `$capital`           | Use this pronunciation if the word has initial capital letter (eg. polish v Polish). |
 | `$allcaps`           | Use this pronunciation if the word is all capitals. |
 | `$accent`            | Used for the pronunciation of a single alphabetic character. The character name is spoken as the base-letter name plus the accent (diacritic) name. e.g. It can be used to specify that "â" is spoken as "a" "circumflex". |
@@ -520,6 +520,14 @@ each language. The number fragments are given in the `*_list` file.
 | `_dpt`        | Word spoken for the decimal point/comma. |
 | `_dpt2`       | Word spoken (if any) at the end of all the digits after a decimal point. |
 
+
+**notes about ordinal numbers**
+To enable ordinal numbers:
+1. set `langopts.numbers` | NUM_ORDINAL_DOT in tr_languages.c
+2. for each number symbol explained above, add a line with suffix o. 
+For example: `_1o` for first, `_51o` for fifty first and so on.
+
+
 ## Character Substitution
 
 Character substitutions can be specified by using a `.replace` section
@@ -535,7 +543,7 @@ needs to be specified. e.g.:
 	   cx  ĉ   // (Esperanto) allow "cx" as an alternative to c-circumflex
 	   ﬁ   fi  // replace a single character ligature by two characters
 
-## (Re)definition of charater groups
+## (Re)definition of character groups
 
 The set of these vowel characters in `A` group and consonants in `C` group may be
 redefined for a particular language. Other sets of letters indicated by `B`, `E`, `F` and `G`

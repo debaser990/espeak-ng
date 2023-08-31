@@ -32,6 +32,10 @@ To build eSpeak NG on Windows, you will need:
 4. the [pcaudiolib](https://github.com/espeak-ng/pcaudiolib) project checked out to
    `src` (as `src/pcaudiolib`).
 
+Optionally, you need:
+
+1. sox (http://sox.sourceforge.net/) to enable audio output for SSML <audio> tag
+
 __NOTE:__ SAPI 5 voices are not currently available in this release of eSpeak NG.
 There is an [issue](https://github.com/espeak-ng/espeak-ng/issues/7) to track
 support for this feature.
@@ -66,15 +70,18 @@ In order to build eSpeak NG, you need:
 
 1.  a functional autotools system (`make`, `autoconf`, `automake`, `libtool`
     and `pkg-config`);
-2.  a functional c compiler that supports C99 (e.g. gcc or clang).
+2.  a functional c compiler that supports C99 (e.g. gcc or clang). Note: if building with speechPlayer, a C++ compiler is required.
 
 Optionally, you need:
 
 1.  the [pcaudiolib](https://github.com/espeak-ng/pcaudiolib) development library
     to enable audio output;
+2.  the speechPlayer development library to
+    enable the speechPlayer Klatt implementation;
 3.  the [sonic](https://github.com/espeak-ng/sonic) development library to
     enable sonic audio speed up support;
 4.  the `ronn` man-page markdown processor to build the man pages.
+5. sox (http://sox.sourceforge.net/) to enable audio output for SSML <audio> tag
 
 To build the documentation, you need:
 
@@ -186,6 +193,7 @@ The following `configure` options control which eSpeak NG features are enabled:
 | Option          | Description                                  | Default |
 |-----------------|----------------------------------------------|---------|
 | `--with-klatt`  | Enable Klatt formant synthesis.              | yes     |
+| `--with-speechplayer`  | Enable the speechPlayer Klatt implementation.              | yes     |
 | `--with-mbrola` | Enable MBROLA voice support.                 | yes     |
 | `--with-sonic`  | Use the sonic library to support higher WPM. | yes     |
 | `--with-async`  | Enable asynchronous commands.                | yes     |
@@ -201,8 +209,8 @@ to build:
 | Option               | Extended Dictionary | Default |
 |----------------------|---------------------|---------|
 | `--with-extdict-ru`  | Russian             | no      |
-| `--with-extdict-zh`  | Mandarin Chinese    | no      |
-| `--with-extdict-zhy` | Cantonese           | no      |
+| `--with-extdict-cmn` | Mandarin Chinese    | no      |
+| `--with-extdict-yue` | Cantonese           | no      |
 
 The extended dictionaries are taken from
 [http://espeak.sourceforge.net/data/](http://espeak.sourceforge.net/data/) and
@@ -256,7 +264,8 @@ In order to build the Android APK file, you need:
 
 1.  the [Android Studio](https://developer.android.com/studio/) with API 26 support;
 2.  the [Android NDK](http://developer.android.com/tools/sdk/ndk/index.html);
-3.  Gradle 5.6.4 or later.
+3.  Gradle 7.4+
+4.  JDK 11
 
 ### Building with Gradle
 
@@ -265,12 +274,7 @@ In order to build the Android APK file, you need:
         $ export ANDROID_HOME=<path-to-the-android-sdk>
 (where `<path-to-the-android-sdk>` is your actual path of SDK folder e.g. `/home/user/Android/Sdk`)
 
-2.  Add location of NDK to the PATH variable:
-
-        $ export PATH=$PATH:<path-to-the-android-ndk>
-(where `<path-to-the-android-ndk>` is your actual path of NDK folder, e.g. `/home/user/Android/Ndk`)
-
-3. Configure the project:
+2. Configure the project:
 
         $ ./autogen.sh
         $ ./configure --with-gradle=<path-to-gradle>
@@ -279,11 +283,10 @@ Check that log shows following lines:
 
         ...
         gradle (Android):              gradle
-        ndk-build (Android):           yes
         ...
 `<path-to-gradle>` may be just `gradle` if it is found in your path by simple name.
 
-4. Build the project:
+3. Build the project:
 
         $ make apk-release
 
@@ -297,15 +300,15 @@ this by:
 1.  Creating a certificate, if you do not already have one:
 
         $ keytool -genkey -keystore [YOUR_CERTIFICATE] -alias [ALIAS] -keyalg RSA -storetype PKCS12
-2. Sign the package using your certificate:
-
-        $ jarsigner -sigalg MD5withRSA -digestalg SHA1 \
-          -keystore [YOUR_CERTIFICATE] \
-          android/build/outputs/apk/release/espeak-release-unsigned.apk [ALIAS]
-3. Align the apk using the zipalign tool.
+2. Align the apk using the zipalign tool.
 
         $ zipalign 4 android/build/outputs/apk/release/espeak-release-unsigned.apk \
-          android/build/outputs/apk/release/espeak-release-signed.apk
+          android/build/outputs/apk/release/espeak-release-zipalign.apk
+3. Sign the package using your certificate:
+
+        $ apksigner --ks [YOUR_CERTIFICATE] --ks-key-alias [ALIAS] \
+          --out android/build/outputs/apk/release/espeak-release-signed.apk \
+          android/build/outputs/apk/release/espeak-release-zipalign.apk
 
 
 ### Opening project in Android Studio
@@ -328,7 +331,5 @@ own data directory to set up the available voices.
 To enable eSpeak, you need to:
 
 1.  go into the Android `Text-to-Speech settings` UI;
-2.  enable `eSpeak TTS` in the `Engines` section;
-3.  select `eSpeak TTS` as the default engine;
-4.  use the `Listen to an example` option to check if everything is working.
-
+2.  select `eSpeak TTS` as the default engine;
+3.  use the `Listen to an example` option to check if everything is working.

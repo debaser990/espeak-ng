@@ -16,7 +16,7 @@
 // spoken when "speak punctuation" option is on.
 
 _.	pUNkt
-*	StErn	$max3
+_*	StErn	$max3
 %	pro:ts'Ent	$max3
 +	plUs	$max3
 =	glaIC	$max3
@@ -211,7 +211,7 @@ oder		o:d3	$u+ $pause
 sondern			$pause
 denn		dEn	$u+ $pause
 wegen	ve:g@n	$u+
-weil	v,aIl		$pause
+weil	v,aIl		$only
 als		als	$u+ $brk
 bevor		b@fo:r	$2 $pause
 also			$pause
@@ -769,6 +769,8 @@ inder		Ind3
 indes		Ind'Es
 indessen	Ind'Es@n
 ingenieur	IndZ@nj'Y:r
+ingenieurin IndZ@nj'Y:rin
+ingenieurinnen IndZ@nj'Y:rinnen
 injurie		$alt
 inka		INkA:
 inkaisch	INkA:IS
@@ -865,7 +867,6 @@ präsident        $3
 prämie           $alt
 prinzip	$2
 prinzipien	prInts'i:pI@n
-protein	pro:te:_|'i:n
 protokoll	$3
 
 referendum	$3

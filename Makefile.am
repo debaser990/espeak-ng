@@ -15,13 +15,18 @@ SHARED_VERSION=2:51:1 # = *.so.1.1.51
 
 MKDIR=mkdir -p
 
-# -Wno-endif-labels : Needed to prevent warnings in ieee80.c.
 AM_CFLAGS = \
-	-Isrc/include -Isrc/include/compat -I$(srcdir)/src/ucd-tools/src/include \
-	-D_BSD_SOURCE -D_DEFAULT_SOURCE -D_POSIX_C_SOURCE=200112L \
-	-Wno-endif-labels
+	-Isrc/include -Isrc/include/compat -I$(srcdir)/src/speechPlayer/include -I$(srcdir)/src/ucd-tools/src/include \
+	-D_BSD_SOURCE -D_DEFAULT_SOURCE -D_POSIX_C_SOURCE=200112L
+AM_CXXFLAGS =
+
+if USE_COVERAGE
+AM_CFLAGS += -fprofile-instr-generate -fcoverage-mapping
+AM_CXXFLAGS += -fprofile-instr-generate -fcoverage-mapping
+endif
 
 EXTRA_DIST=
+CLEANFILES = dictsource/ru_listx dictsource/cmn_listx dictsource/yue_listx
 
 bin_PROGRAMS =
 lib_LTLIBRARIES =
@@ -45,8 +50,7 @@ EXTRA_DIST += ChangeLog
 
 all-local: \
 	espeak-ng-data/phontab \
-	dictionaries \
-	mbrola
+	dictionaries
 
 uninstall-hook:
 	rm -rf $(DESTDIR)$(DATADIR)
@@ -69,8 +73,12 @@ if HAVE_GRADLE
 endif
 
 distclean-local:
-	rm -rf espeak-ng-data/phondata-manifest
 	rm -f espeak-ng-data/*_dict
+	rm -f espeak-ng-data/intonations
+	rm -f espeak-ng-data/phondata
+	rm -f espeak-ng-data/phondata-manifest
+	rm -f espeak-ng-data/phonindex
+	rm -f espeak-ng-data/phontab
 
 ##### custom rules:
 
@@ -101,19 +109,21 @@ EXTRA_DIST += $(vim_addons_syntax_DATA)
 ##### documentation:
 
 src/espeak-ng.1: src/espeak-ng.1.ronn
-	$(RONN) --roff $<
+	$(RONN) --roff -o $(shell dirname $@) $<
 
 src/speak-ng.1: src/speak-ng.1.ronn
-	$(RONN) --roff $<
+	$(RONN) --roff -o $(shell dirname $@) $<
 
-docs_MARKDOWN != ls docs/*.md docs/*/*.md docs/*/*/*.md
+docs_MARKDOWN = $(wildcard docs/*.md) $(wildcard docs/*/*.md) $(wildcard docs/*/*/*.md)
 docs_HTML = ${docs_MARKDOWN:.md=.html}
 
 docs:	$(docs_HTML) \
 	src/espeak-ng.1.html \
 	src/speak-ng.1.html \
-	CHANGELOG.html \
+	ChangeLog.html \
 	README.html
+
+EXTRA_DIST += src/espeak-ng.1.ronn src/speak-ng.1.ronn $(docs_MARKDOWN)
 
 ##### build targets:
 
@@ -134,8 +144,8 @@ src_libespeak_ng_la_LDFLAGS = -version-info $(SHARED_VERSION) -lpthread -lm \
 
 src_libespeak_ng_la_CFLAGS = \
 	-fPIC -fvisibility=hidden \
-	-pedantic -fno-exceptions -D PATH_ESPEAK_DATA=\"$(DATADIR)\" -DLIBESPEAK_NG_EXPORT \
-	${PCAUDIOLIB_CFLAGS} ${AM_CFLAGS}
+	-pedantic -fno-exceptions -DPATH_ESPEAK_DATA=\"$(DATADIR)\" -DLIBESPEAK_NG_EXPORT \
+	${PCAUDIOLIB_CFLAGS} ${SONIC_CFLAGS} ${AM_CFLAGS}
 
 src_libespeak_ng_la_SOURCES = \
 	src/ucd-tools/src/case.c \
@@ -144,47 +154,101 @@ src_libespeak_ng_la_SOURCES = \
 	src/ucd-tools/src/proplist.c \
 	src/ucd-tools/src/scripts.c \
 	src/ucd-tools/src/tostring.c \
+	src/libespeak-ng/common.c \
 	src/libespeak-ng/compiledata.c \
 	src/libespeak-ng/compiledict.c \
-	src/libespeak-ng/compilembrola.c \
 	src/libespeak-ng/dictionary.c \
 	src/libespeak-ng/encoding.c \
 	src/libespeak-ng/error.c \
 	src/libespeak-ng/espeak_api.c \
 	src/libespeak-ng/ieee80.c \
 	src/libespeak-ng/intonation.c \
+	src/libespeak-ng/langopts.c \
 	src/libespeak-ng/mnemonics.c \
 	src/libespeak-ng/numbers.c \
 	src/libespeak-ng/readclause.c \
 	src/libespeak-ng/phoneme.c \
 	src/libespeak-ng/phonemelist.c \
 	src/libespeak-ng/setlengths.c \
+	src/libespeak-ng/soundicon.c \
 	src/libespeak-ng/spect.c \
 	src/libespeak-ng/speech.c \
 	src/libespeak-ng/ssml.c \
 	src/libespeak-ng/synthdata.c \
 	src/libespeak-ng/synthesize.c \
-	src/libespeak-ng/synth_mbrola.c \
 	src/libespeak-ng/translate.c \
+	src/libespeak-ng/translateword.c \
 	src/libespeak-ng/tr_languages.c \
 	src/libespeak-ng/voices.c \
 	src/libespeak-ng/wavegen.c
 
 noinst_HEADERS = \
+	src/libespeak-ng/common.h \
+	src/libespeak-ng/compiledict.h \
+	src/libespeak-ng/dictionary.h \
+	src/libespeak-ng/error.h \
+	src/libespeak-ng/espeak_command.h \
+	src/libespeak-ng/event.h \
+	src/libespeak-ng/fifo.h \
+	src/libespeak-ng/ieee80.h \
+	src/libespeak-ng/intonation.h \
+	src/libespeak-ng/klatt.h \
+	src/libespeak-ng/langopts.h \
+	src/libespeak-ng/mbrola.h \
+	src/libespeak-ng/mbrowrap.h \
+	src/libespeak-ng/mnemonics.h \
+	src/libespeak-ng/numbers.h \
+	src/libespeak-ng/phoneme.h \
+	src/libespeak-ng/phonemelist.h \
+	src/libespeak-ng/readclause.h \
+	src/libespeak-ng/setlengths.h \
+	src/libespeak-ng/sintab.h \
+	src/libespeak-ng/soundicon.h \
+	src/libespeak-ng/spect.h \
+	src/libespeak-ng/speech.h \
+	src/libespeak-ng/sPlayer.h \
+	src/libespeak-ng/ssml.h \
+	src/libespeak-ng/synthdata.h \
+	src/libespeak-ng/synthesize.h \
+	src/libespeak-ng/translate.h \
+	src/libespeak-ng/translateword.h \
+	src/libespeak-ng/voice.h \
+	src/libespeak-ng/wavegen.h \
+	src/speechPlayer/include/speechPlayer.h \
+	src/speechPlayer/src/frame.h \
+	src/speechPlayer/src/sample.h \
+	src/speechPlayer/src/speechPlayer.h \
+	src/speechPlayer/src/speechWaveGenerator.h \
+	src/speechPlayer/src/utils.h \
+	src/speechPlayer/src/waveGenerator.h \
 	src/ucd-tools/src/include/ucd/ucd.h
 
 if OPT_KLATT
-src_libespeak_ng_la_CFLAGS  += -DINCLUDE_KLATT
+AM_CFLAGS  += -DUSE_KLATT=1
 src_libespeak_ng_la_SOURCES += src/libespeak-ng/klatt.c
 endif
 
+if OPT_SPEECHPLAYER
+AM_CFLAGS  += -DUSE_SPEECHPLAYER=1
+src_libespeak_ng_la_SOURCES += src/libespeak-ng/sPlayer.c
+src_libespeak_ng_la_SOURCES += src/speechPlayer/src/frame.cpp
+src_libespeak_ng_la_SOURCES += src/speechPlayer/src/speechPlayer.cpp
+src_libespeak_ng_la_SOURCES += src/speechPlayer/src/speechWaveGenerator.cpp
+src_speak_ng_SOURCES = src/speak-ng.cpp
+else
+src_speak_ng_SOURCES = src/speak-ng.c
+endif
+
 if OPT_MBROLA
-src_libespeak_ng_la_CFLAGS  += -DINCLUDE_MBROLA
-src_libespeak_ng_la_SOURCES += src/libespeak-ng/mbrowrap.c
+AM_CFLAGS  += -DUSE_MBROLA=1
+src_libespeak_ng_la_SOURCES += \
+	src/libespeak-ng/mbrowrap.c \
+	src/libespeak-ng/synth_mbrola.c \
+	src/libespeak-ng/compilembrola.c
 endif
 
 if OPT_ASYNC
-src_libespeak_ng_la_CFLAGS  += -DUSE_ASYNC
+AM_CFLAGS  += -DUSE_ASYNC=1
 src_libespeak_ng_la_SOURCES += \
 	src/libespeak-ng/espeak_command.c \
 	src/libespeak-ng/event.c \
@@ -198,9 +262,8 @@ man1_MANS += src/speak-ng.1
 endif
 
 src_speak_ng_LDADD   = src/libespeak-ng.la
-src_speak_ng_LDFLAGS = -static -lm ${PCAUDIOLIB_LIBS}
+src_speak_ng_LDFLAGS = -static -lm ${PCAUDIOLIB_LIBS} ${LIBFUZZER_NO_MAIN}
 src_speak_ng_CFLAGS  = -Isrc/libespeak-ng ${AM_CFLAGS}
-src_speak_ng_SOURCES = src/speak-ng.c
 
 bin_PROGRAMS += src/espeak-ng
 
@@ -208,8 +271,11 @@ if HAVE_RONN
 man1_MANS += src/espeak-ng.1
 endif
 
-src_espeak_ng_LDADD   = src/libespeak-ng.la ${PCAUDIOLIB_LIBS}
+src_espeak_ng_LDADD   = src/libespeak-ng.la ${PCAUDIOLIB_LIBS} ${LIBFUZZER_NO_MAIN}
 src_espeak_ng_SOURCES = src/espeak-ng.c
+if HAVE_LIBFUZZER
+nodist_EXTRA_src_espeak_ng_SOURCES = force-cxx-linking.cxx
+endif
 
 ##### tests:
 
@@ -220,7 +286,7 @@ check_LTLIBRARIES += src/libespeak-ng-test.la
 
 src_libespeak_ng_test_la_LDFLAGS = $(src_libespeak_ng_la_LDFLAGS)
 src_libespeak_ng_test_la_CFLAGS  = \
-	-fPIC -pedantic -fno-exceptions -D PATH_ESPEAK_DATA=\"$(DATADIR)\" -DLIBESPEAK_NG_EXPORT \
+	-fPIC -pedantic -fno-exceptions -DPATH_ESPEAK_DATA=\"$(DATADIR)\" -DLIBESPEAK_NG_EXPORT \
 	${PCAUDIOLIB_CFLAGS} ${AM_CFLAGS}
 src_libespeak_ng_test_la_SOURCES = $(src_libespeak_ng_la_SOURCES)
 
@@ -228,38 +294,39 @@ check_PROGRAMS += tests/encoding.test
 
 tests_encoding_test_LDADD   = src/libespeak-ng.la
 tests_encoding_test_SOURCES = tests/encoding.c
+tests/encoding.check: LOG_COMPILER=$(VALGRIND)
 
 check_PROGRAMS += tests/readclause.test
 
 tests_readclause_test_CFLAGS  = -Isrc/libespeak-ng ${AM_CFLAGS}
 tests_readclause_test_LDADD   = src/libespeak-ng-test.la
 tests_readclause_test_SOURCES = tests/readclause.c
+tests/readclause.check: LOG_COMPILER=$(VALGRIND)
 
 check_PROGRAMS += tests/api.test
 
 tests_api_test_CFLAGS  = -Isrc/libespeak-ng ${AM_CFLAGS}
 tests_api_test_LDADD   = src/libespeak-ng-test.la
 tests_api_test_SOURCES = tests/api.c
+tests/api.check: LOG_COMPILER=$(VALGRIND)
+
+check_PROGRAMS += tests/ieee80.test
+
+tests_ieee80_test_CFLAGS  = -Isrc/libespeak-ng ${AM_CFLAGS}
+tests_ieee80_test_LDADD   = src/libespeak-ng-test.la
+tests_ieee80_test_SOURCES = tests/ieee80.c
+tests/ieee80.check: LOG_COMPILER=$(VALGRIND)
 
 .test.check:
 	@echo "  TEST      $<"
-	@ESPEAK_DATA_PATH=$(CURDIR) $< && echo "  PASSED    $<"
+	@ESPEAK_DATA_PATH=$(CURDIR) $(LOG_COMPILER) $< && echo "  PASSED    $<"
 
-check:	tests/encoding.check \
-	tests/readclause.check \
-	tests/translate.check \
-	tests/ssml.check \
-	tests/ssml-fuzzer.check \
-	tests/api.check \
-	tests/language-phonemes.check \
-	tests/language-replace.check \
-	tests/language-pronunciation.check \
-	tests/language-numbers-cardinal.check \
-	tests/language-numbers-ordinal.check \
-	tests/non-executable-files-with-executable-bit.check \
-	tests/klatt.check \
-	tests/mbrola.check \
-	tests/bom.check
+TEST = $(filter-out tests/windows-data.test,$(wildcard tests/*.test)) \
+       $(check_PROGRAMS)
+
+check:	$(TEST:.test=.check)
+
+EXTRA_DIST += $(TEST) tests/common src/windows/installer/Product.wxs
 
 ##### fuzzer:
 
@@ -271,22 +338,39 @@ tests_libfuzzrunner_la_CFLAGS  = -Isrc/libespeak-ng ${AM_CFLAGS}
 tests_libfuzzrunner_la_SOURCES = tests/fuzzrunner.c
 endif
 
+
+
 check_PROGRAMS += tests/ssml-fuzzer.test
 tests_ssml_fuzzer_test_CFLAGS  = ${AM_CFLAGS}
 tests_ssml_fuzzer_test_SOURCES = tests/ssml-fuzzer.c
 tests_ssml_fuzzer_test_LDADD   = src/libespeak-ng.la
 
+if OPT_SPEECHPLAYER
+tests_api_test_SOURCES += tests/dummy.cpp
+tests_encoding_test_SOURCES += tests/dummy.cpp
+tests_readclause_test_SOURCES += tests/dummy.cpp
+tests_ssml_fuzzer_test_SOURCES += tests/dummy.cpp
+endif
+
+
 if HAVE_LIBFUZZER
-tests_ssml_fuzzer_test_CFLAGS += -fsanitize=fuzzer
-tests_ssml_fuzzer_test_LDFLAGS = -fsanitize=fuzzer
+noinst_PROGRAMS =  tests/fuzzing/synth_fuzzer.test
+tests_fuzzing_synth_fuzzer_test_SOURCES = tests/fuzzing/synth_fuzzer.c
+tests_fuzzing_synth_fuzzer_test_LDADD =  src/libespeak-ng.la
+tests_fuzzing_synth_fuzzer_test_CFLAGS=  ${AM_CFLAGS} -DPATH_ESPEAK_DATA=\"$(abs_top_srcdir)/espeak-ng-data\" -Isrc/libespeak-ng
+tests_fuzzing_synth_fuzzer_test_LDFLAGS= ${AM_LDFLAGS} -static -lm -Wl,-z,relro ${PCAUDIOLIB_LIBS} ${LIBFUZZER_NO_MAIN}
 else
 tests_ssml_fuzzer_test_LDADD += tests/libfuzzrunner.la
 endif
 
+FUZZ_SSML = $(wildcard tests/ssml/*.ssml tests/ssml-fuzzer/*.ssml)
+
 tests/ssml-fuzzer.check: tests/ssml-fuzzer.test
 	@echo "  TEST      $<"
-	@ESPEAK_DATA_PATH=$(CURDIR) $< tests/ssml/*.ssml tests/ssml-fuzzer/*.ssml && echo "  PASSED    $<"
+	@ESPEAK_DATA_PATH=$(CURDIR) $< $(FUZZ_SSML) && echo "  PASSED    $<"
 
+
+EXTRA_DIST += $(FUZZ_SSML) $(wildcard tests/ssml/*.expected)
 
 ##### phoneme data:
 
@@ -296,118 +380,21 @@ espeak-ng-data/phonindex: phsource/phonemes.stamp
 espeak-ng-data/phontab: phsource/phonemes.stamp
 espeak-ng-data/intonations: phsource/phonemes.stamp
 
+PHSOURCE = \
+	$(wildcard phsource/*) \
+	$(wildcard phsource/*/*) \
+	$(wildcard phsource/*/*/*)
+
+LANGDATA = \
+	$(wildcard espeak-ng-data/lang/*) \
+	$(wildcard espeak-ng-data/lang/*/*) \
+	$(wildcard espeak-ng-data/voices/*/*)
+
+EXTRA_DIST += $(filter-out phsource/phonemes.stamp,$(PHSOURCE)) \
+	      $(filter-out espeak-ng-data/voices/!v/Mr serious,$(LANGDATA))
+
 phsource/phonemes.stamp: \
-	phsource/ph_afrikaans \
-	phsource/ph_akan \
-	phsource/ph_albanian \
-	phsource/ph_amhari \
-	phsource/ph_arabic \
-	phsource/ph_aragon \
-	phsource/ph_armenian \
-	phsource/ph_assamese \
-	phsource/ph_azerbaijani \
-	phsource/ph_base2 \
-	phsource/ph_basque \
-	phsource/ph_bengali \
-	phsource/ph_bulgarian \
-	phsource/ph_catalan \
-	phsource/ph_cherokee \
-	phsource/ph_consonants \
-	phsource/ph_croatian \
-	phsource/ph_czech \
-	phsource/ph_danish \
-	phsource/ph_dari \
-	phsource/ph_divehi \
-	phsource/ph_dutch \
-	phsource/ph_english \
-	phsource/ph_english_n \
-	phsource/ph_english_rp \
-	phsource/ph_english_sc \
-	phsource/ph_english_us \
-	phsource/ph_english_wi \
-	phsource/ph_english_wm \
-	phsource/ph_esperanto \
-	phsource/ph_estonian \
-	phsource/ph_farsi \
-	phsource/ph_finnish \
-	phsource/ph_french \
-	phsource/ph_georgian \
-	phsource/ph_german \
-	phsource/ph_greek \
-	phsource/ph_greek_ancient \
-	phsource/ph_greenlandic \
-	phsource/ph_gujarati \
-	phsource/ph_haitian \
-	phsource/ph_hakka \
-	phsource/ph_hindi \
-	phsource/ph_hindi_base \
-	phsource/ph_hungarian \
-	phsource/ph_icelandic \
-	phsource/ph_indonesian \
-	phsource/ph_interlingua \
-	phsource/ph_irish \
-	phsource/ph_italian \
-	phsource/ph_japanese \
-	phsource/ph_kannada \
-	phsource/ph_kazakh \
-	phsource/ph_kinyarwanda \
-	phsource/ph_korean \
-	phsource/ph_kurdish \
-	phsource/ph_kyrgyz \
-	phsource/ph_latin \
-	phsource/ph_latvian \
-	phsource/ph_lithuanian \
-	phsource/ph_lojban \
-	phsource/ph_macedonian \
-	phsource/ph_malayalam \
-	phsource/ph_maltese \
-	phsource/ph_manipuri \
-	phsource/ph_maori \
-	phsource/ph_marathi \
-	phsource/ph_myanmar \
-	phsource/ph_nahuatl \
-	phsource/ph_nepali \
-	phsource/ph_northern-sotho \
-	phsource/ph_norwegian \
-	phsource/ph_oriya \
-	phsource/ph_oromo \
-	phsource/ph_polish \
-	phsource/ph_portugal \
-	phsource/ph_pt_brazil \
-	phsource/ph_punjabi \
-	phsource/ph_pyash \
-	phsource/ph_romanian \
-	phsource/ph_russian \
-	phsource/ph_russian_lv \
-	phsource/ph_s_gaelic \
-	phsource/ph_serbian \
-	phsource/ph_setswana \
-	phsource/ph_shan \
-	phsource/ph_sinhala \
-	phsource/ph_slovak \
-	phsource/ph_slovenian \
-	phsource/ph_spanish \
-	phsource/ph_spanish_la \
-	phsource/ph_swahili \
-	phsource/ph_swedish \
-	phsource/ph_tamil \
-	phsource/ph_tatar \
-	phsource/ph_telugu \
-	phsource/ph_tibetan \
-	phsource/ph_turkish \
-	phsource/ph_turkmen \
-	phsource/ph_urdu \
-	phsource/ph_uyghur \
-	phsource/ph_uzbek \
-	phsource/ph_vietnam \
-	phsource/ph_vietnam_hue \
-	phsource/ph_vietnam_sgn \
-	phsource/ph_welsh \
-	phsource/ph_wolof \
-	phsource/ph_yoruba \
-	phsource/ph_zh \
-	phsource/ph_zh_yue \
-	phsource/phonemes \
+	$(PHSOURCE) \
 	src/espeak-ng
 	ESPEAK_DATA_PATH=$(CURDIR) src/espeak-ng --compile-intonations && \
 		ESPEAK_DATA_PATH=$(CURDIR) src/espeak-ng --compile-phonemes && \
@@ -415,32 +402,16 @@ phsource/phonemes.stamp: \
 
 ##### android targets:
 
-jni:
-	cd android && ndk-build
-
-apk-release: jni espeakdata
+apk-release: espeakdata
 	cd android && $(GRADLE) assembleRelease
 
-apk-debug: jni espeakdata
+apk-debug: espeakdata
 	cd android && $(GRADLE) assembleDebug
 
-apk-check: jni espeakdata
+apk-check: espeakdata
 	cd android && $(GRADLE) connectedCheck
 
-android/res/raw/espeakdata.zip: espeak-ng-data/phontab dictionaries
-	mkdir -pv android/res/raw
-	rm -f $@
-	find espeak-ng-data/{intonations,phondata,phonindex,phontab} | zip -@ $@
-	find espeak-ng-data/*_dict | zip -@ $@
-	find espeak-ng-data/lang -type f | zip -@ $@
-	find espeak-ng-data/voices -type f | grep -vF "/mb/" | zip -@ $@
-
-android/res/raw/espeakdata_version: android/res/raw/espeakdata.zip
-	sha1sum $< | awk '{ print $$1 }' > $@
-
-espeakdata: \
-	android/res/raw/espeakdata.zip \
-	android/res/raw/espeakdata_version
+espeakdata: espeak-ng-data/phontab dictionaries
 
 ##### dictionaries:
 
@@ -458,10 +429,18 @@ dictsource/%_emoji:
 dictsource/%_extra:
 	touch $@
 
+# NOTE: % (pattern) rules are GNU make specific we can extract the 'stem' that
+# matched the % in the target ($@) using $(*F) (which isn't GNU make specific,
+# just this interpretation is.)
+#
+# The rm $@ stops espeak-ng trying to load the old dictionary when it is run
+# (at the cost of a spurious error message.)
+#
+# NOTE: keep in sync with 'espeak-ng-data/yue_dict' more specific rule.
 espeak-ng-data/%_dict: src/espeak-ng phsource/phonemes.stamp
 	@echo "  DICT      $@"
-	@cd dictsource && ESPEAK_DATA_PATH=$(CURDIR) LD_LIBRARY_PATH=../src:${LD_LIBRARY_PATH} ../src/espeak-ng \
-		--compile=`echo $@ | sed -e 's,espeak-ng-data/,,g' -e 's,_dict,,g'` && cd ..
+	rm -f $@
+	cd dictsource && ESPEAK_DATA_PATH=$(CURDIR) ../src/espeak-ng --compile="$(*F)"
 
 dictionaries: \
 	espeak-ng-data/af_dict \
@@ -471,12 +450,14 @@ dictionaries: \
 	espeak-ng-data/as_dict \
 	espeak-ng-data/az_dict \
 	espeak-ng-data/ba_dict \
+	espeak-ng-data/be_dict \
 	espeak-ng-data/bg_dict \
 	espeak-ng-data/bn_dict \
 	espeak-ng-data/bpy_dict \
 	espeak-ng-data/bs_dict \
 	espeak-ng-data/ca_dict \
 	espeak-ng-data/chr_dict \
+	espeak-ng-data/cmn_dict \
 	espeak-ng-data/cs_dict \
 	espeak-ng-data/cv_dict \
 	espeak-ng-data/cy_dict \
@@ -520,6 +501,7 @@ dictionaries: \
 	espeak-ng-data/ku_dict \
 	espeak-ng-data/ky_dict \
 	espeak-ng-data/la_dict \
+	espeak-ng-data/lb_dict \
 	espeak-ng-data/lfn_dict \
 	espeak-ng-data/lt_dict \
 	espeak-ng-data/lv_dict \
@@ -529,6 +511,7 @@ dictionaries: \
 	espeak-ng-data/mr_dict \
 	espeak-ng-data/ms_dict \
 	espeak-ng-data/mt_dict \
+	espeak-ng-data/mto_dict \
 	espeak-ng-data/my_dict \
 	espeak-ng-data/nci_dict \
 	espeak-ng-data/ne_dict \
@@ -539,18 +522,23 @@ dictionaries: \
 	espeak-ng-data/or_dict \
 	espeak-ng-data/pa_dict \
 	espeak-ng-data/pap_dict \
+	espeak-ng-data/piqd_dict \
 	espeak-ng-data/pl_dict \
 	espeak-ng-data/pt_dict \
 	espeak-ng-data/py_dict \
+	espeak-ng-data/qdb_dict \
 	espeak-ng-data/qu_dict \
 	espeak-ng-data/quc_dict \
+	espeak-ng-data/qya_dict \
 	espeak-ng-data/ro_dict \
 	espeak-ng-data/ru_dict \
 	espeak-ng-data/sd_dict \
 	espeak-ng-data/shn_dict \
 	espeak-ng-data/si_dict \
+	espeak-ng-data/sjn_dict \
 	espeak-ng-data/sk_dict \
 	espeak-ng-data/sl_dict \
+	espeak-ng-data/smj_dict \
 	espeak-ng-data/sq_dict \
 	espeak-ng-data/sr_dict \
 	espeak-ng-data/sv_dict \
@@ -567,8 +555,23 @@ dictionaries: \
 	espeak-ng-data/ur_dict \
 	espeak-ng-data/uz_dict \
 	espeak-ng-data/vi_dict \
-	espeak-ng-data/zh_dict \
-	espeak-ng-data/zhy_dict
+	espeak-ng-data/yue_dict
+
+DICTSOURCE = \
+	$(wildcard dictsource/*_emoji) \
+	$(wildcard dictsource/*_extra) \
+	$(wildcard dictsource/*_list) \
+	$(wildcard dictsource/*_rules) \
+	$(wildcard dictsource/extra/*) \
+	dictsource/ar_listx \
+	dictsource/bg_listx \
+	dictsource/he_listx \
+	dictsource/ia_listx \
+	dictsource/it_listx \
+	dictsource/tk_listx \
+	dictsource/tr_listx
+
+EXTRA_DIST += $(DICTSOURCE)
 
 af: espeak-ng-data/af_dict
 espeak-ng-data/af_dict: dictsource/af_list dictsource/af_rules dictsource/af_extra dictsource/af_emoji
@@ -590,6 +593,9 @@ espeak-ng-data/az_dict: dictsource/az_list dictsource/az_rules dictsource/az_ext
 
 ba: espeak-ng-data/ba_dict
 espeak-ng-data/ba_dict: dictsource/ba_list dictsource/ba_rules
+
+be: espeak-ng-data/be_dict
+espeak-ng-data/be_dict: dictsource/be_list dictsource/be_rules
 
 bg: espeak-ng-data/bg_dict
 espeak-ng-data/bg_dict: dictsource/bg_list dictsource/bg_listx dictsource/bg_rules dictsource/bg_extra dictsource/bg_emoji
@@ -738,6 +744,9 @@ espeak-ng-data/ky_dict: dictsource/ky_list dictsource/ky_rules dictsource/ky_ext
 la: espeak-ng-data/la_dict
 espeak-ng-data/la_dict: dictsource/la_list dictsource/la_rules dictsource/la_extra
 
+lb: espeak-ng-data/lb_dict
+espeak-ng-data/lb_dict: dictsource/lb_list dictsource/lb_rules dictsource/lb_emoji
+
 lfn: espeak-ng-data/lfn_dict
 espeak-ng-data/lfn_dict: dictsource/lfn_list dictsource/lfn_rules dictsource/lfn_extra
 
@@ -764,6 +773,9 @@ espeak-ng-data/ms_dict: dictsource/ms_list dictsource/ms_rules dictsource/ms_ext
 
 mt: espeak-ng-data/mt_dict
 espeak-ng-data/mt_dict: dictsource/mt_list dictsource/mt_rules dictsource/mt_extra
+
+mto: espeak-ng-data/mto_dict
+espeak-ng-data/mto_dict: dictsource/mto_list dictsource/mto_rules
 
 my: espeak-ng-data/my_dict
 espeak-ng-data/my_dict: dictsource/my_list dictsource/my_rules dictsource/my_extra dictsource/my_emoji
@@ -795,6 +807,9 @@ espeak-ng-data/pa_dict: dictsource/pa_list dictsource/pa_rules dictsource/pa_ext
 pap: espeak-ng-data/pap_dict
 espeak-ng-data/pap_dict: dictsource/pap_list dictsource/pap_rules dictsource/pap_extra
 
+piqd: espeak-ng-data/piqd_dict
+espeak-ng-data/piqd_dict: dictsource/piqd_list dictsource/piqd_rules
+
 pl: espeak-ng-data/pl_dict
 espeak-ng-data/pl_dict: dictsource/pl_list dictsource/pl_rules dictsource/pl_extra dictsource/pl_emoji
 
@@ -804,11 +819,17 @@ espeak-ng-data/pt_dict: dictsource/pt_list dictsource/pt_rules dictsource/pt_ext
 py: espeak-ng-data/py_dict
 espeak-ng-data/py_dict: dictsource/py_list dictsource/py_rules dictsource/py_extra
 
+qdb: espeak-ng-data/qdb_dict
+espeak-ng-data/qdb_dict: dictsource/qdb_list dictsource/qdb_rules
+
 qu: espeak-ng-data/qu_dict
 espeak-ng-data/qu_dict: dictsource/qu_list dictsource/qu_rules dictsource/qu_extra
 
 quc: espeak-ng-data/quc_dict
 espeak-ng-data/quc_dict: dictsource/quc_list dictsource/quc_rules dictsource/quc_extra dictsource/quc_emoji
+
+qya: espeak-ng-data/qya_dict
+espeak-ng-data/qya_dict: dictsource/qya_list dictsource/qya_rules
 
 ro: espeak-ng-data/ro_dict
 espeak-ng-data/ro_dict: dictsource/ro_list dictsource/ro_rules dictsource/ro_extra dictsource/ro_emoji
@@ -831,11 +852,17 @@ espeak-ng-data/shn_dict: dictsource/shn_list dictsource/shn_rules dictsource/shn
 si: espeak-ng-data/si_dict
 espeak-ng-data/si_dict: dictsource/si_list dictsource/si_rules dictsource/si_extra dictsource/si_emoji
 
+sjn: espeak-ng-data/sjn_dict
+espeak-ng-data/sjn_dict: dictsource/sjn_list dictsource/sjn_rules
+
 sk: espeak-ng-data/sk_dict
 espeak-ng-data/sk_dict: dictsource/sk_list dictsource/sk_rules dictsource/sk_extra dictsource/sk_emoji
 
 sl: espeak-ng-data/sl_dict
 espeak-ng-data/sl_dict: dictsource/sl_list dictsource/sl_rules dictsource/sl_extra dictsource/sl_emoji
+
+smj: espeak-ng-data/smj_dict
+espeak-ng-data/smj_dict: dictsource/smj_list dictsource/smj_rules
 
 sq: espeak-ng-data/sq_dict
 espeak-ng-data/sq_dict: dictsource/sq_list dictsource/sq_rules dictsource/sq_extra dictsource/sq_emoji
@@ -893,26 +920,30 @@ espeak-ng-data/uz_dict: dictsource/uz_list dictsource/uz_rules dictsource/uz_ext
 vi: espeak-ng-data/vi_dict
 espeak-ng-data/vi_dict: dictsource/vi_list dictsource/vi_rules dictsource/vi_extra dictsource/vi_emoji
 
-zh: espeak-ng-data/zh_dict
-dictsource/zh_listx:
-	ln -svf extra/zh_listx dictsource/
-if HAVE_ZH_EXTENDED_DICTIONARY
-espeak-ng-data/zh_dict: dictsource/zh_list dictsource/zh_rules dictsource/zh_listx dictsource/zh_extra dictsource/zh_emoji
+cmn: espeak-ng-data/cmn_dict
+dictsource/cmn_listx:
+	ln -svf extra/cmn_listx dictsource/
+if HAVE_CMN_EXTENDED_DICTIONARY
+espeak-ng-data/cmn_dict: dictsource/cmn_list dictsource/cmn_rules dictsource/cmn_listx dictsource/cmn_extra dictsource/cmn_emoji
 else
-espeak-ng-data/zh_dict: dictsource/zh_list dictsource/zh_rules dictsource/zh_extra dictsource/zh_emoji
+espeak-ng-data/cmn_dict: dictsource/cmn_list dictsource/cmn_rules dictsource/cmn_extra dictsource/cmn_emoji
 endif
 
-zhy: espeak-ng-data/zhy_dict
-dictsource/zhy_listx:
-	ln -svf extra/zhy_listx dictsource/
-if HAVE_ZHY_EXTENDED_DICTIONARY
-espeak-ng-data/zhy_dict: dictsource/zhy_list dictsource/zhy_rules dictsource/zhy_extra dictsource/zhy_listx dictsource/zhy_emoji
+yue: espeak-ng-data/yue_dict
+dictsource/yue_listx:
+	ln -svf extra/yue_listx dictsource/
+
+# NOTE: keep in sync with espeak-ng-data/%_dict more generic rule.
+if HAVE_YUE_EXTENDED_DICTIONARY
+espeak-ng-data/yue_dict: src/espeak-ng phsource/phonemes.stamp dictsource/yue_list dictsource/yue_rules dictsource/yue_extra dictsource/yue_listx dictsource/yue_emoji
 else
-espeak-ng-data/zhy_dict: dictsource/zhy_list dictsource/zhy_rules dictsource/zhy_extra dictsource/zhy_emoji
+espeak-ng-data/yue_dict: src/espeak-ng phsource/phonemes.stamp dictsource/yue_list dictsource/yue_rules dictsource/yue_extra dictsource/yue_emoji
 endif
+	@echo "  DICT      $@"
+	rm -f $@
 	cd dictsource && ESPEAK_DATA_PATH=$(CURDIR) LD_LIBRARY_PATH=../src:${LD_LIBRARY_PATH} ../src/espeak-ng --compile=yue && cd ..
 
-dictsource/zhy_emoji:
+dictsource/yue_emoji:
 	@echo "  EMOJI     $@"
 	@if test x"${CLDR_PATH}" = x ; then \
 		touch $@ ; \
@@ -922,56 +953,20 @@ dictsource/zhy_emoji:
 
 ##### mbrola:
 
+if OPT_MBROLA
+
+PHSOURCE_MBROLA = \
+	$(wildcard phsource/mbrola/*)
+
 mbrola: \
-	espeak-ng-data/mbrola_ph/af1_phtrans \
-	espeak-ng-data/mbrola_ph/ar1_phtrans \
-	espeak-ng-data/mbrola_ph/ar2_phtrans \
-	espeak-ng-data/mbrola_ph/ca_phtrans \
-	espeak-ng-data/mbrola_ph/cr1_phtrans \
-	espeak-ng-data/mbrola_ph/cs_phtrans \
-	espeak-ng-data/mbrola_ph/de2_phtrans \
-	espeak-ng-data/mbrola_ph/de4_phtrans \
-	espeak-ng-data/mbrola_ph/de6_phtrans \
-	espeak-ng-data/mbrola_ph/de8_phtrans \
-	espeak-ng-data/mbrola_ph/ee1_phtrans \
-	espeak-ng-data/mbrola_ph/en1_phtrans \
-	espeak-ng-data/mbrola_ph/es_phtrans \
-	espeak-ng-data/mbrola_ph/es3_phtrans \
-	espeak-ng-data/mbrola_ph/es4_phtrans \
-	espeak-ng-data/mbrola_ph/fr_phtrans \
-	espeak-ng-data/mbrola_ph/gr1_phtrans \
-	espeak-ng-data/mbrola_ph/gr2_phtrans \
-	espeak-ng-data/mbrola_ph/grc-de6_phtrans \
-	espeak-ng-data/mbrola_ph/hn1_phtrans \
-	espeak-ng-data/mbrola_ph/hu1_phtrans \
-	espeak-ng-data/mbrola_ph/ic1_phtrans \
-	espeak-ng-data/mbrola_ph/id1_phtrans \
-	espeak-ng-data/mbrola_ph/in_phtrans \
-	espeak-ng-data/mbrola_ph/ir1_phtrans \
-	espeak-ng-data/mbrola_ph/it1_phtrans \
-	espeak-ng-data/mbrola_ph/it3_phtrans \
-	espeak-ng-data/mbrola_ph/jp_phtrans \
-	espeak-ng-data/mbrola_ph/la1_phtrans \
-	espeak-ng-data/mbrola_ph/lt_phtrans \
-	espeak-ng-data/mbrola_ph/ma1_phtrans \
-	espeak-ng-data/mbrola_ph/mx1_phtrans \
-	espeak-ng-data/mbrola_ph/mx2_phtrans \
-	espeak-ng-data/mbrola_ph/nl_phtrans \
-	espeak-ng-data/mbrola_ph/nz1_phtrans \
-	espeak-ng-data/mbrola_ph/pl1_phtrans \
-	espeak-ng-data/mbrola_ph/pt1_phtrans \
-	espeak-ng-data/mbrola_ph/ptbr_phtrans \
-	espeak-ng-data/mbrola_ph/ptbr4_phtrans \
-	espeak-ng-data/mbrola_ph/ro1_phtrans \
-	espeak-ng-data/mbrola_ph/sv_phtrans \
-	espeak-ng-data/mbrola_ph/sv2_phtrans \
-	espeak-ng-data/mbrola_ph/tl1_phtrans \
-	espeak-ng-data/mbrola_ph/tr1_phtrans \
-	espeak-ng-data/mbrola_ph/us_phtrans \
-	espeak-ng-data/mbrola_ph/us3_phtrans \
-	espeak-ng-data/mbrola_ph/vz_phtrans \
-	espeak-ng-data/mbrola_ph/zh_phtrans
+	$(patsubst phsource/mbrola/%,espeak-ng-data/mbrola_ph/%_phtrans,$(PHSOURCE_MBROLA))
 
 espeak-ng-data/mbrola_ph/%_phtrans: phsource/mbrola/% src/espeak-ng
 	mkdir -p espeak-ng-data/mbrola_ph
 	ESPEAK_DATA_PATH=$(CURDIR) src/espeak-ng --compile-mbrola=phsource/mbrola/$*
+
+EXTRA_DIST += $(PHSOURCE_MBROLA)
+
+all-local: mbrola
+
+endif

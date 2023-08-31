@@ -65,6 +65,7 @@ adit	$1
 admet  $alt
 adorn  $alt2
 adultere	$2
+adulter	$2
 aed  $alt
 aerea	a'E:Rea
 aeree	$2
@@ -534,6 +535,7 @@ biond	bj'ond
 biondine	$2
 biosintesi $2
 biotop $2
+bipartisan	$2
 bipede $1
 bipol $2
 bipost  $alt2
@@ -598,6 +600,7 @@ bradan $1
 bradip $1
 bragadin $3
 bred  $alt
+brefotrofio	$alt
 bregan $1  $alt
 bren  $alt2
 brentonic  $alt2
@@ -607,6 +610,7 @@ brev	$alt
 brianzol $3
 brillio	$2
 brindisi $1
+brioscine	$3
 brisgovia  $alt
 broccostell  $alt2
 brod  $alt
@@ -716,6 +720,7 @@ capofila	$3
 capolavor  $alt2
 capoliveri $3
 capoluog  $alt
+capostipiti	$3
 cappellania $4
 cappuccine	$3
 caprifogli  $alt
@@ -854,6 +859,7 @@ cetr  $alt2
 cheliceri $2
 cheope $1
 cheradi $1
+chicchessia	kikes:'ia
 chiacchierio	$3
 chiavari $1
 chichibi $3
@@ -877,6 +883,7 @@ cigol	$1
 cigolio	$3
 ciliegi  $alt
 ciliegia $3  $alt
+ciliegine	$4
 cimeg $1
 cimolais $3
 cincischio	$3
@@ -1006,8 +1013,8 @@ coniug	k'oniudZ
 conn  $alt2
 cons  $alt
 consci  $alt
-console  $alt
-conson $1  $alt
+console	k'Onsole
+consoli	k'Onsoli
 consuet  $alt
 contadine	$3
 contafili	$3
@@ -1057,6 +1064,7 @@ corporeo	$2
 corred  $alt
 corrett  $alt
 corrid $2
+corridoi	koR*id'oj
 corrott  $alt2
 cors	$alt2
 cort	$alt2
@@ -1123,6 +1131,7 @@ cuoi  $alt
 cupol $1
 curazia $3
 curcum $1
+curiosi	$alt2
 cuscut $1
 custode  $alt
 custodi	$2 $alt
@@ -1220,6 +1229,7 @@ diesis  $alt
 diet  $alt
 difett  $alt
 diglossia $3
+dimension	$alt2
 dimer $1
 dimetr $1
 dinam $1
@@ -1464,6 +1474,7 @@ erd  $alt2
 ereb $1
 erede  $alt
 erem $1
+erett	$alt
 ergosterol $4
 erigone $2
 eritem  $alt
@@ -1556,6 +1567,7 @@ falcon $2
 faleci  $alt
 falment  $alt
 famedi  $alt
+famosi	$alt2
 fantocci  $alt
 farmaceutic $3
 farmacia  fa@-*matS'i:a
@@ -1648,6 +1660,7 @@ fobia $2
 foder $1
 fogli  $alt
 foglia  $alt
+foglie	$alt
 fol  $alt
 folag $1
 folgaria $3
@@ -1846,6 +1859,7 @@ goliardie	golia@-*d'i:e
 gomit $1  $alt2
 gomitoli	$2
 gomm  $alt2
+gommini	$2
 gommoresine	$3
 gonars $2
 gonartria	$3
@@ -1855,7 +1869,7 @@ gonnes  $alt
 gorga		$alt2
 gorgia $1
 gorgoglii	go@-*gol^'i:I
-gorgonzol $3
+gorgonzol	go@-*gondz'Ol
 got  $alt
 goti  $alt
 gotta	$alt2
@@ -1928,6 +1942,7 @@ impet $1
 impieg  $alt
 implicit $2
 improperi	imp@-*'op,eRi $only
+incantesim	inkant'ezim
 incazzati	ink,a_ts'ati
 incerti	$2 $alt
 incipit	'intSipit
@@ -2135,6 +2150,7 @@ levanz $1  $alt
 leve  $alt
 lezioncine	$3
 liber $1
+libido	$2
 licantrop $2
 licomede  $alt
 liet  $alt
@@ -2184,6 +2200,7 @@ lugubre $1
 lugubri	$1
 lumac $2
 luog  $alt
+luoghi	$alt
 luteo $1
 macabr $1
 macac $2
@@ -2287,6 +2304,7 @@ materia $2
 materie	$2
 matricid	$3
 matron  $alt
+mattugia	$2
 mazzaccher $2
 medi  $alt
 media  $alt
@@ -2355,7 +2373,6 @@ meteore $2
 metil	$2
 metod  $alt
 metodi  $alt
-metr  $alt2
 mezenzi  $alt
 mezz  $alt
 mezzadria	medz:ad@-*'ia
@@ -2598,6 +2615,7 @@ nucleo	$1
 nucleoprotein	n'ukleo||p@-*ote'in
 nucleosintesi $4
 numer $1
+numerosi	$alt2
 nunatak $3
 nuot  $alt
 nuov  $alt
@@ -2708,6 +2726,7 @@ ossa		$alt2
 ossea	$1
 ossee	$1
 osseo $1
+ossei	$1
 ossequi  $alt
 osset  $alt
 ossia $2
@@ -2787,6 +2806,7 @@ paraurti $3
 paravia $3
 parenchim  $alt
 parentesi	$2  $alt
+pareti	$alt2
 parere $2  $alt2
 parghelia $3
 paria $2
@@ -2986,6 +3006,9 @@ plumbee	$1
 plumbei	$1
 plumbeo	$1
 plurigemin	$3
+poche	$alt
+po'	p'O
+pochi	$alt
 pocol $2
 podere $2  $alt2
 podi  $alt
@@ -3121,6 +3144,7 @@ prodigo	$1
 prodott  $alt2
 proemi  $alt
 proenzim	p@-*o-endz'im
+professor	$alt2
 profet  $alt
 profezia $3
 profil $2
@@ -3297,6 +3321,7 @@ ribattezzare	@-*i_bat:edz:'aRe
 ribec  $alt
 ribollio	$3
 ribosi  $alt
+ricasoli	$alt2
 riccoboni  $alt
 ricerc  $alt2
 ricevitoria	$5
@@ -3762,6 +3787,7 @@ stereotip	$3
 stesicor $2
 stigmate $1
 stilobate $2
+stipiti	$1
 stom	$alt
 stomaci	$1
 stop	$alt
@@ -3969,7 +3995,7 @@ tolf  $alt
 tolmezz  $alt
 toltechi  $alt
 tolve  $alt
-tomi  $alt
+tom	$alt
 ton  $alt
 toni  $alt
 tonn  $alt2
@@ -3987,6 +4013,7 @@ torni  $alt2
 tornol  $alt2
 torped  $alt
 torpedini	$2
+torr	$alt2
 torrile	$2
 tors  $alt2
 tortor $1  $alt2
@@ -4021,7 +4048,9 @@ tratalias $3
 traversie	$2
 travesi  $alt
 tre	t@-*'e
+trenta	$alt2
 trebaseleghe $3  $alt2
+treccine	$2
 tredicesim  $alt
 tredici  $alt2
 tremil $2

@@ -1,6 +1,6 @@
 # Languages
 
-Development version of eSpeak NG supports 121 languages and accents,
+Development version of eSpeak NG supports 127 languages and accents,
 which are listed in table below.
 
 To check, what languages are supported by distributed version, run `espeak-ng --voices` command.
@@ -16,9 +16,10 @@ To check, what languages are supported by distributed version, run `espeak-ng --
 | `ine`       | `hyw`             | Indo-European         | Armenian                    | West Armenian          |
 | `inc`       | `as`              | Indic                 | Assamese                    |                        |
 | `trk`       | `az`              | Turkic                | Azerbaijani                 |                        |
-| `trk`       | `ba`              |                       | Bashkir                     |                        |
+| `trk`       | `ba`              | Turkic                | Bashkir                     |                        |
 | `trk`       | `cu`              | Turkic                | Chuvash                     |                        |
 |             | `eu`              |                       | Basque                      |                        |
+| `zle`       | `be`              | East Slavic           | Belarusian                  |                        |
 | `inc`       | `bn`              | Indic                 | Bengali                     |                        |
 | `inc`       | `bpy`             | Indic                 | Bishnupriya Manipuri        |                        |
 | `zls`       | `bs`              | South Slavic          | Bosnian<sup>\[1,2\]</sup>   |                        |
@@ -67,7 +68,7 @@ To check, what languages are supported by distributed version, run `espeak-ng --
 | `art`       | `ia`              | Constructed           | Interlingua                 |                        |
 | `art`       | `io`              | Constructed           | Ido                         |                        |
 | `roa`       | `it`              | Romance               | Italian                     |                        |
-| `jpx`       | `ja`              | Japanese              | Japanese<sup>\[3\]</sup>    |                        |
+| `jpx`       | `ja`              | Japanese              | Japanese<sup>\[4\]</sup>    |                        |
 | `dra`       | `kn`              | Dravidian             | Kannada                     |                        |
 | `inc`       | `kok`             | Indic                 | Konkani                     |                        |
 |             | `ko`              |                       | Korean                      |                        |
@@ -75,6 +76,7 @@ To check, what languages are supported by distributed version, run `espeak-ng --
 | `trk`       | `kk`              | Turkic                | Kazakh                      |                        |
 | `trk`       | `ky`              | Turkic                | Kyrgyz                      |                        |
 | `itc`       | `la`              | Italic                | Latin                       |                        |
+| `gmw`       | `lb`              | West Germanic         | Luxembourgish               |                        |
 | `bat`       | `ltg`             | Baltic                | Latgalian                   |                        |
 | `bat`       | `lv`              | Baltic                | Latvian                     |                        |
 | `art`       | `lfn`             | Constructed           | Lingua Franca Nova<sup>\[1,2\]</sup> |               |
@@ -96,14 +98,18 @@ To check, what languages are supported by distributed version, run `espeak-ng --
 | `art`       | `py`              | Constructed           | Pyash                       |                        |
 | `zlw`       | `pl`              | West Slavic           | Polish                      |                        |
 | `roa`       | `pt-br`           | Romance               | Portuguese                  | Brazillian             |
+| `art`       | `qdb`             | Constructed           | Lang Belta                  |                        |
 |             | `qu`              |                       | Quechua                     |                        |
 | `myn`       | `quc`             | Mayan                 | K'iche'                     |                        |
+| `art`       | `qya`             | Constructed           | Quenya                      |                        |
 | `roa`       | `pt`              | Romance               | Portuguese                  | Portugal               |
 | `inc`       | `pa`              | Indic                 | Punjabi                     |                        |
+| `art`       | `piqd`            | Constructed           | Klingon                     |                        |
 | `roa`       | `ro`              | Romance               | Romanian                    |                        |
 | `zle`       | `ru`              | East Slavic           | Russian                     |                        |
 | `zle`       | `ru-lv`           | East Slavic           | Russian                     | Latvia                 |
 | `zle`       | `uk`              | East Slavic           | Ukrainian                   |                        |
+| `art`       | `sjn`             | Constructed           | Sindarin                    |                        |
 | `zls`       | `sr`              | South Slavic          | Serbian<sup>\[1,2\]</sup>   |                        |
 | `bnt`       | `tn`              | Bantu                 | Setswana                    |                        |
 | `inc`       | `sd`              | Indic                 | Sindhi                      |                        |
@@ -111,6 +117,7 @@ To check, what languages are supported by distributed version, run `espeak-ng --
 | `inc`       | `si`              | Indic                 | Sinhala                     |                        |
 | `zlw`       | `sk`              | West Slavic           | Slovak                      |                        |
 | `zls`       | `sl`              | South Slavic          | Slovenian                   |                        |
+| `urj`       | `smj`             | Uralic                | Lule Saami                  |                        |
 | `roa`       | `es`              | Romance               | Spanish                     | Spain                  |
 | `roa`       | `es-419`          | Romance               | Spanish                     | Latin American         |
 | `bnt`       | `sw`              | Bantu                 | Swahili                     |                        |

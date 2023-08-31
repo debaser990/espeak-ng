@@ -1,6 +1,6 @@
 
 // This file is UTF-8 encoded
-// Updated 2020 june  13 by Christian Leo M, <llajta2012@gmail.com>
+// Updated 2022 september  23 by Christian Leo Mameli, <llajta2012ATgmail.com>
 
 //  $alt   change [e] or [o] in the stressed syllable to [E] or [O]
 //  $alt2  change [E] or [O] in the stressed syllable to [e] or [o]
@@ -516,7 +516,7 @@ lui	$u+ $only
 lei	$u+ $only
 noi	$u+	$only
 voi	v'oi	$only
-loro	$u+
+loro	l'oRo
 egli	$u+
 ella	$u+
 essa	$u+ 
@@ -572,6 +572,7 @@ nessun	$u2+
 // conjunctions and Adverbs
 
 anche	$u+
+ancor	$alt2 $only
 ancora	$alt2
 attraverso 	$alt
 benchè		$u+	$brk
@@ -642,11 +643,11 @@ de      $u+ $only
 in	$u 	$only $nounf
 in	'i:n	$atend
 nel	 $u+	$only
-nello	$u+
-nella	$u+
-nei     $u+ 
-negli   $u+ 
-nelle   $u+
+nello	n'el:o
+nella	n'el:a
+nei	n'ei 
+negli   $alt2 
+nelle	n'elle
 ne      $u+   $only
 
 su	$u+ $only
@@ -696,14 +697,13 @@ sia	$u+
 siate	$u+
 siano	$u+
 fossi	$u1+	$alt
-fosse	$u1+
+fosse	f'os:e
 fossimo	$u1+
 fossero	$u1+
 sarei	$u+
-saresti	$u2+
+sarest	saR'est
 sarebbe	$u2+
-saremmo	$u+
-sareste	$u+
+saremmo	saR'em:o
 sarebbero	$u2+
 
 // aux verb, to have
@@ -739,17 +739,17 @@ abbia	$verbf
 abbiamo	$u+	$verbf
 abbiate	$u+
 abbiano	$1	$verbf
-avessi	$u+	$verbf
-avesse	$u+ $verbf
+avessi	av'es:i	$verbf
+avesse	av'es:e $verbf
 avessimo	$u+	$verbf
-aveste	$u+
+aveste	av'este $verbf
 avessero	$u+	$verbf
 
 avrei	$u+	$verbf
-avresti	$u+	$verbf
+avresti	av@-*'esti	$verbf
 avrebbe	$u+	$verbf
-avremmo	$u+	$verbf
-avreste	$u+
+avremmo	av@-*'em:o	$verbf
+avreste	av@-*'este $verbf
 avrebbero	$2	$verbf
 
 // Letters at end
@@ -798,6 +798,7 @@ bitter	$1
 black	bl'E:k
 blackout	bl'Ek'aUt
 blind	bl'aInd $onlys
+blister	$1 $onlys
 blogger	bl'Oge@-*
 blues	bl'u:z
 bluff	bl'ef:	$only
@@ -888,11 +889,13 @@ cowboy	k'aw||b'oI
 cracker	$1
 croissant	k@-*uass'an
 cult	k'a/:lt	$onlys
+cyclette	sikl'Et:
 dance	d'Ens
 database	datab'Eiz
 decibel	$1
 deejay		_^_EN
 default	_^_EN
+défaillance	d,efaj'aN
 delivery	$2
 desaparecido	d,EzapaReT'ido
 design	d,ez'aIn	$only
@@ -936,6 +939,7 @@ fantasy	f'a:ntazi
 farkle	f'a@-*k,Ol
 fashion	f'aS@n
 feed	_^_en
+feedback	f'i:d_b,Ek
 feeling	f'i:lIN
 fender	$1 $alt
 fiction	f'ikS@n
@@ -962,6 +966,7 @@ fuji	fu:ZI
 game	g'Ejm $onlys
 gangster	$1
 garage	gaR'aZ
+gargoyle	ga@-*g'Oil
 gate	g'eIt $onlys
 gay	g'eI
 general	$1 $onlys
@@ -974,6 +979,8 @@ google		_^_EN
 green	g@-*i:n $onlys
 greenpeace	g@-*,iN||p'i:s
 guinness	g'iness
+guardrail	g'a@-*d||@-*,Eil
+gustibus	$1
 hacker	'ake@-*
 hackeraggio	akeR'adZ:o
 hackerare	ake*'a:Re
@@ -1079,6 +1086,7 @@ mouse	maus
 musical	m'juzikOl $onlys
 my	_^_EN
 myspace	m'aI||sp'Eis
+nation	n'ESon $onlys
 national	n'a/Sonal $onlys
 new	_^_EN
 newsletter	njuzl:'et:e@-*
@@ -1087,6 +1095,7 @@ noir	nU'a:R $only
 nomination	nomIn'eSon
 nonchalance	non_Sal'ans
 nylon	n'aIlon
+oberdan	'oberdan
 office	_^_EN
 one	w'a/n $onlys $capital
 online	,on||l'aIn
@@ -1104,6 +1113,7 @@ pancake	pan_k'eIk
 partner	$1
 passepartout	pas_pa@-*t'u
 paternoster	$3
+Peeves	_^_en
 peluche	pel'uS $onlys
 performance	pe@-*f'O@-*mans $onlys
 performer	$2
@@ -1197,6 +1207,7 @@ smiley	_^_EN
 snack	sn'E:k
 software	s'Oft[_we@-*
 sonar	$1	$alt $only
+sound	s'awnd $onlys
 Spotify	sp,otif'aI
 souvenir	suvEn'i@-*
 spanish		_^_EN
@@ -1249,6 +1260,7 @@ turnover	$2
 tweet	tw'i:t[
 tweeter	_^_EN
 twitter	$1
+umbridge	_^_en
 under	'ande@-*
 university	juniv'e@-*sitI
 up	_^_en $only
@@ -1263,6 +1275,7 @@ viewer	vj'u:Er
 virtual	$1 $onlys
 visual	v'iZwal $only
 vodafone	v'odafon
+voldemort	v'Olde@-*mO@-*t
 voilà	_^_FR
 volkswagen	_^_DE
 voodoo	vud'u
@@ -1273,6 +1286,7 @@ walzer	v'altsE@-*
 water	v'atE@-*	$only
 wave		_^_EN
 way	_^_EN
+Weasley	w'i:zlei
 web		wEb
 webmaster	$2
 weekend	w,ik'end
@@ -1506,7 +1520,7 @@ lumache	$2
 maceria	$2
 macerie	$2
 madrepatria	$3
-maggior	$2
+maggior	$2 $alt2
 magnifici	$2
 malleoli	$2
 malvagia	$2
@@ -1549,7 +1563,7 @@ officine	$3
 olfattori	$3 $alt
 oneri	$1
 onorifici	$3
-oper	$1 $alt2
+oper	$1 $alt
 operai	op,eR'a:I
 operaio	op,e*'a:jo
 origin	$2
@@ -1738,6 +1752,7 @@ vuot	vU'Ot
 
 com'è	kom'E
 com'era	kom'E:Ra
+com'erano	kom'E:Rano
 cos'hai	koz'a:i
 cos'è	koz'E
 cos'altro	koz'a:lt@-*o/
@@ -1791,6 +1806,7 @@ amsterdam	$1
 andorrano	$3
 angeles	$1
 angola	$2 $capital
+Ankara	$1
 aostano	aost'ano
 apache	ap'a:S
 arab $1
@@ -1892,6 +1908,7 @@ civezzano	$3
 civitavecchia  $alt
 colombano	$3
 comanche	kom'a:nS
+commonwealth	_^_EN
 conzano	$2
 copenhagen	kopen'agen
 corchiano	$3
@@ -2172,6 +2189,7 @@ seui	$2
 seul $2 $only
 seychelles	seIS'El
 siberia	s,ib'ERi;a
+silverstone	s'ilve@-*ston
 simpliciano	$3
 sinai	s'i:naI
 siniscola	$3 $alt2
@@ -2223,6 +2241,7 @@ turchia $2
 uligano	$3
 ultramondano	$4
 ultramontano	$4
+ungar	$1
 uzzano	$2
 vajont	vaj'O:nt
 valdostano	$3
@@ -2243,6 +2262,7 @@ vissano	$2
 vitorchiano	$4
 washington	_^_EN
 wimbledon	$1
+woodstock	_^_EN
 zaire	dza'i:Re
 zanzibar	$1
 zigano	ts-ig'a/no
@@ -2281,6 +2301,7 @@ amelia	$2	$alt2
 amerigo	$2
 amicis	$2
 amilcare $2
+amplifon	$1
 anastacia	anast'azja
 anastasia $3
 anderson	$1
@@ -2312,17 +2333,21 @@ asterix	$1
 audacity	awd'asiti
 augias	a'u:dZas
 avirex	$1
+azkaban	'atskaban
+baccasara	$2
 bach	b'a:k	$only
 bardot	ba@-*d'o
 bartali	$1
 basile	$2
 baudelaire	bOdl'E@-*
 bayer	$1
+beauxbatons	bobat'on
 bearzot	bea*_dz'Ot $only
 beatle	b'i:tol
 beccaria $3
 beethoven	be:t'o:ven
 benetton	$3
+benjamin	$1
 bergomi	$1
 behringer	b'e:RiNg,E@-*
 bertold  $alt
@@ -2337,6 +2362,7 @@ brown	b@-*'a:w2n	$onlys
 bruce	b@-*'Us $only
 buffon	$2 $only
 cacciol	katS:'ol
+cadillac	$1
 caino	ka'i:no/
 caligola	$2
 calogger	$2
@@ -2347,6 +2373,7 @@ carey	_^_en
 carmel	$2
 cassano	$2
 casula	$2
+catherine	_^_EN
 catia	k'a:tia
 celentano	$3
 cesare $1
@@ -2366,13 +2393,14 @@ chrysler	_^_EN
 chuck	tS'a/k
 churchill	_^_en
 cimabue  tSimab'u:e
+citroën	sit@-*o'en
 collodi		$2 $alt $only
-consoli	$1 $capital $only
 corine	k'ORIn $capital
 corrias	$2
 cristofor $2
 cupido	$2
 danilo	$2
+danny	d'En:I
 davidson	$1
 debor $1  $alt
 deborah	$1 $alt2
@@ -2396,7 +2424,9 @@ elia	el'ia
 elizabeth	el'izabet[
 emanuel	em,a:nU'El
 emmanuel	$2 $only
+ennia	'e:nnia
 enric	$2
+ericsson	$1 $alt
 erika	$1
 esposit	$2
 ettore $1  $alt
@@ -2411,6 +2441,7 @@ fahrenheit	f'aRenaIt
 federic	$3
 felicita	$2
 fenice	$2
+ferlaino	fe@-*la'i:no
 ferrer	$2	$alt2
 fischer	f'iSE@-* $onlys
 florencio	fl,OR'ensIo
@@ -2457,6 +2488,7 @@ hitchcock	'itS_kok
 honore $3
 hulk	h'alk
 iacopo	j'akopo
+ibrahimovic	ib@-*a'imovitS
 icar $1
 igor	$1
 ingrassia	$3
@@ -2466,12 +2498,15 @@ isaac	'aIza:k
 isabel	$3
 isaia  iza'i:a
 isocrate $2
+isozaki	izodz'akI
 ital $1
 ivano	$2
 jace	_^_en $only
 jack	dZ'E:k
 jackson	_^_EN
 jacopo	j'a:kopo
+jackie	dZ'E:kI
+Jaqueline	Z,ak_l'i:n
 james	_^_EN
 jane	_^_EN
 jarno	j'a:@-*no
@@ -2493,6 +2528,7 @@ katia	k'a:tia
 kennedy	$1 $alt
 kinder	$1 $onlys
 landolf  $alt
+lawrence	l'oRens
 laurenzi  $alt
 lee	_^_en $capital
 lennon	_^_EN
@@ -2529,6 +2565,7 @@ mariapia	$4
 mary	m'E:*i	$only
 marilyn	m'E:r*ilIN
 marylin	m'ERilin
+marsili	$2
 marzott	ma@-*dz'Ot:
 masala	$1
 mayer	$1
@@ -2539,18 +2576,21 @@ mercury	$1 $alt2 $only
 merola	$1
 michael	m'aIkOl
 michel	mik'e/l
+michielin	mik,el'in
 michelangel	$3
 michelle	m,iS'el	$only
 miguel	mig'E:l
 mike	_^_EN
 mikolaj	mik,Ol'a:j
 misseri	$2
+mohammed	mo,am:'Ed
 mogol $2
 mondadori  $alt2
 monika	$1
 monroe	m'On||r,ow
 morissette	m'ORIsEt[
 mowgli	m'o:glI
+mourinho	muR'in^o
 mozilla	m,o|dz'il:a
 muresan	$3
 murgia	$1
@@ -2561,11 +2601,14 @@ newton	nj'utoN
 nichol	n'i:kol	$onlys
 nichola	n'ikola
 nicola	$2
+nicolodi	$3
 noe  $2 $alt
 olg  $alt
 oliver	'O:liv,e@-* $onlys
 ollie	'Ol:i
 omero	om'E:Ro	$capital
+panteon	$1
+pantheon	$1
 paol $1
 parkinson	$1
 parmalat	$1 $only
@@ -2591,6 +2634,7 @@ poirot	puaR'o
 pooh	p'U:
 porsche	p'O@-*S
 potter	$1	$onlys
+percy	p'E@-*sI
 presley	p@-*'e:zleI
 prestigiacomo	$3
 rafael	$3
@@ -2599,9 +2643,11 @@ ray	@-*'eI
 reaper	@-*'i:pe@-*
 renault	@-*en'o
 rizzoli $2
+roberts	@-*'Obe@-*ts
 robinson	$1 $alt $onlys
 rocky	@-*'Oki
 roger	$1 $alt
+ron	@-*'On $only
 rosalia $3
 Rosemarie	@-*'ozm,a*i
 ryanair	@-*'aIaneR
@@ -2662,9 +2708,12 @@ vainer	v'aIne@-*	$only
 valeria	$2 $alt2
 valter	$1 $onlys
 van	$u $capital $only
+vanzetti	vandz'Et:i
+vazquez	vask'Ets
 vedder	$1 $onlys
 vermouth	v'E@-*mut
 victor	$1 $only
+villeneuve	v,iln'e:v
 vincent	v'inseNt[ $only
 vladimir	$3
 wagner	v'agnE@-*
@@ -2673,6 +2722,7 @@ walter	v'alte@-*
 waters	w'OTe@-*s $only
 wilde	w'aIld
 wojtyla	vojt'ila
+Wood	v'ud
 woody	v'udI
 yasmine	jazm'in
 zaccaria	$3
@@ -2741,9 +2791,11 @@ accampano	$2
 accarezzano	$3 $alt
 accecano	$2
 accechino	$2
+acced	atS:'Ed
 acceler	atS:'Ele:R
 accelerano	atS:'E:l,eRano
 accelerino	$2
+accendano	$2
 accennino	$2
 accentrino	$2
 accentuano	$2
@@ -2781,6 +2833,7 @@ adagia	$2
 adagiano	$2
 adagino	$2
 adattino	$2
+addebitano	$2
 addensano	$2
 addensino	$2
 addentrano	$2	$alt
@@ -2984,6 +3037,7 @@ avvalere	$3
 avvantaggiano	$3
 avvantaggino	$3
 avvelenino	$3
+avventurano	$3
 avver	$2
 avverano	$2
 avverino	$2
@@ -2994,6 +3048,7 @@ avvicinino	$3
 avvid	$2
 avvidero	$2
 avviino	av:'ijno
+avvinghiano	$2
 avvisano	$2
 avvisino	$2
 azzardino	$2
@@ -3029,7 +3084,7 @@ boccino	$1
 boicottino	$3
 bombardano	$2
 bombardino	$2
-brahmano	$1
+bramano	$1
 bramino	$1
 brancolano	$1
 brancolino	$1
@@ -3040,6 +3095,8 @@ brindino	$1
 brontolano	$1
 brontolino	$1
 brucino	$1
+brulicano	$1
+bucano	$1
 burlano	$1
 burlino	$1
 bussino	$1
@@ -3117,7 +3174,9 @@ comincino	$2
 commemor	$2 $alt
 commutino	$2
 compaiano	$2
+comparvero	$2
 compensano	$2
+comper	$1
 competano	$2 $alt
 compiace	kompj'atSe/
 compiacere	$3
@@ -3163,10 +3222,12 @@ consider	$2
 considerino	$2
 consigliano	$2
 consiglino	$2
-consol	$2
+consola	$2
+consolo	$2
 consolano	$2
 consolidano	$2
 consolino	$2
+conson	$1  $alt
 constatano	$2
 consultano	$2
 consumano	$2
@@ -3175,6 +3236,7 @@ contagia	$2
 contamin	$2
 contemplano	$2
 contemplino	$2
+contendono	$2 $alt
 contenere	$3 $alt2
 contestino	$2
 contino	$1
@@ -3247,6 +3309,7 @@ deleghino	$1
 delimit	$2
 delimitano	$2
 delimitino	$2
+delineano	$2
 delinquere	$2
 deliziano	$2
 delizino	$2
@@ -3279,8 +3342,10 @@ deturpano	$2
 deturpino	$2
 devastino	$2
 deviano	$1
+dialogano	di'alogano
 diano	d'iano
 dicano	$1
+dicev	$alt2
 dichiarano	$2
 dichiarino	$2
 diedero	$1 $alt
@@ -3494,11 +3559,12 @@ fotografano	$2
 franino	$1
 frantumano	$2
 fratturano	$2
-friggerl	$1
+freghino	$1
 frizzare	f@-*its2:'aRe
 frodano	$1
 frodino	$1
 frughino	$1
+frullano	$1
 frustrano	$1
 frustrino	$1
 fucil	$2
@@ -3543,6 +3609,7 @@ giurino	$1
 gocciolano	$1
 godano	$1
 godere	$2 $alt2
+gonfiano	$1
 gonfino	$1
 governino	$2
 graffiano	$1
@@ -3618,6 +3685,7 @@ impugnino	$2
 impuntano	$2
 impuntino	$2
 imput	$1
+imputano	$1
 imputino	$1
 inabissino	$3
 inalber	$2
@@ -3734,6 +3802,7 @@ interrog	$2
 interrogano	$2
 interroghi	$2
 interroghino	$2
+interrott	$alt2
 interseca	$2
 intersecano	$2
 intervallano	$3
@@ -3932,7 +4001,7 @@ obblighi	$1
 obblighino	$1
 occultano	$2
 occup	$1
-occupano	$1
+occupano	$1 $alt
 occupino	$1
 odiano	$1	$alt
 odino	$1
@@ -3969,6 +4038,7 @@ palpita	$1
 palpitano	$1
 paragono	$3 $alt2
 parano	$1
+pareggiano	$2
 parlano	$1
 parlino	$1
 partano	$1
@@ -3998,6 +4068,7 @@ perdurino	$2
 perforano	$2
 perlustrano	$2
 permanere	$3
+permettev	$alt2
 perseguita	$2
 perseguitano	$2
 pervaderti	$2
@@ -4029,10 +4100,12 @@ possiedano	$2
 posticipano	$2
 postulano	$2
 potano	$1
+potess	$alt2
 pranzai	p@-*aNdz'aI
 pranzano	p@-*'andzano
 praticano	$1
 preannunziano	$3
+precedano	$2
 precipit	$2
 precipita	$2
 precipitano	$2
@@ -4046,6 +4119,7 @@ predici	$2
 predomin	$2
 preghino	$1
 pregia	$1
+pregiudicano	$2
 premiano	$1
 premurano	$2
 prendano	$1
@@ -4056,7 +4130,9 @@ preoccupano	$2
 preoccupino	$2
 preordin	$2
 preparano	$2
+prescegliere	$2
 presentino	$2
+presenziano	$2
 pressino	$1
 prestino	$1	$alt2
 prevalere	$3
@@ -4076,8 +4152,10 @@ producano	$2
 profilano	$2
 programmano	$2
 proiettino	$3
+prolunghino	$2
 pronuncino	$2
 propinino	$2
+proponere	$3 $alt
 propugnano	$2
 prorogano	$1
 prosciughino	$2
@@ -4099,6 +4177,7 @@ pullulano	$1
 pulsano	$1
 puntano	$1
 quietano	$1 $alt
+raccoglie	$alt
 raccomandano	$3
 raccontino	$2 $verb
 racimol	$2
@@ -4120,7 +4199,8 @@ rallegrano	$2
 rallentino	$2
 rammentino	$2
 rapportino	$2
-rappresentino	$3
+rappresentano	$3 $alt
+rappresentino	$3 $alt
 rassegnano	$2
 rassegnino	$2
 rassicurano	$3
@@ -4135,7 +4215,7 @@ ravvedere	$3
 ravvisano	$2
 ravvisino	$2
 razziano	$1
-razziavano	$3
+razziavano	$2
 reagii	@-*eadZ'i:j
 realizzino	$3
 recano	$1
@@ -4345,6 +4425,7 @@ salvano	$1
 salvino	$1
 sanguin	$1
 sanguinano	$1
+sapev	$alt2
 sappiano	$1
 saturano	$1
 saziano	$1
@@ -4382,6 +4463,8 @@ scannino	$1
 scantono	$2
 scappano	$1
 scappino	$1
+scarcer	$1
+scarcerano	$1
 scardin	$1
 scaricano	$1
 scarichino	$1
@@ -4455,6 +4538,7 @@ separino	$2
 sequestrano	$2
 servino	$1
 seviziano	$2
+sfaldano	$1
 sfamano	$1
 sfatano	$1
 sferrano	$1
@@ -4702,6 +4786,7 @@ tatuano	$1
 telefonano	$2
 teleregol	$3
 temere	$2	$alt2
+temev	$2 $alt2
 temperano	$1
 tempestino	$2
 temporeggiano	$3
@@ -4823,6 +4908,7 @@ vendano	$1
 vendemmiano	$2
 vendicano	$1
 vendichino	$1
+venne	$alt2
 vergogniano	$2
 vergognino	$2
 versano	$1
@@ -4871,6 +4957,7 @@ zuccherano	$1
 (capitano tutte)	k'apitano||t'ut:e
 (che capitano)	ke||k'apitano
 (quando capitano)	kw'ando||k'a:pitano
+(non capitano)	n,on||_k'a:pitano
 (dai che)	d'ai||ke
 (a seguito)	a||s'e:guito
 (al seguito)	als'egwito
@@ -4901,6 +4988,7 @@ ch'erano	k'E*ano
 
 // pronominal verbs
 
+abbattutasi	$3
 abituarcisi	$4
 accadutomi	$3
 accertatene	$2
@@ -4915,6 +5003,7 @@ aiutami	$2
 allettal	$2
 alzal	$1
 alzati	$1	$atstart
+applicarcisi	$3
 approfittane	$3
 aprigli	$1
 aprimel	$1
@@ -4940,8 +5029,7 @@ cliccaci	$1
 cliccal	$1
 compiersi	$1
 compil	$2
-comunicacel	$2
-comunical	$2
+conclusosi	$2
 conosciutisi	$3
 conclusasi	$2
 confrontal	$2
@@ -4964,8 +5052,10 @@ dammene	$1
 deciditi	$2
 dedical	$1
 deposital	$2
-dicasi	$1
 degener	$2
+dicasi	$1
+diffusasi	$2
+diffusosi	$2
 digitalo	$1
 digliel	$1
 digliene	$1
@@ -4973,12 +5063,13 @@ dimenticatene	$2
 dimmelo	$1
 dimostratoti	$3
 diramal	$2
-dirigerl	$2
-dirigersi	$2
+dirigiti	$2
 disabilital	$3
 disconnettiti	$3
 disegnaci	$2
+dissolversi	$2
 distintasi	$2
+distintosi	$2
 domandatel	$3
 domandati	$2
 drizzarsi	d@-*its2:'a@-*si
@@ -4993,6 +5084,7 @@ fattoci	$1
 fermati	$1 $atstart
 fermatosi	$2
 formatosi	$2
+friggerl	$1
 giuntaci	$1
 giuntami	$1
 giuravi	$2
@@ -5028,12 +5120,14 @@ invaghitosi	$3
 inviataci	$3
 inviatami	$3
 inviatati	$3
+iscrittosi	$2
 lasciataci	$2
 liberaci	$1
 mandal	$1
 mandatel	$2
 mangial	m'a:ndZal // $1
 mescolatisi	$3
+mettercisi	$1
 morditi	$1
 mostravi	$2
 offertogli	$2
@@ -5043,6 +5137,7 @@ perdermici	$1
 perdonatel	$3
 pizzical	$1
 pizzicami	$1
+poniti	p'o:niti
 portala	$1
 portalo	$1
 portamici	$1
@@ -5052,6 +5147,7 @@ presentaci	$2
 privaci	$1
 procurati	$2 $atstart
 promessomi	$2
+proponiti	$2
 proteggiti	$2 $alt2
 pulisciti	$2
 raddrizzarl	@-*ad:@-*its2:'a@-*l
@@ -5071,8 +5167,11 @@ rieccoci	$2
 rieccol	$2
 rieccomi	@-*i'e:k:Omi
 rieccoti	$2
+riformatisi	$3
+riformatosi	$3
 rincorrerl	$2
 riportal	$2
+ripresosi	$2
 risparmiaci	$2
 risparmial	$2
 risparmiami	$2
@@ -5119,6 +5218,7 @@ tenutosi	$2
 tornaci	$1
 tornatene	$1
 trasferirvisi	$3
+trattieniti	$2
 trattasi	$1
 tuffati	$1 $atstart
 usal	'u:za/l

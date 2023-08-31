@@ -21,10 +21,15 @@
   - [speed](#speed)
   - [words](#words)
 - [Language Attributes](#language-attributes)
+  - [brackets](#brackets)
+  - [bracketsAnnounced](#bracketsAnnounced)
   - [phonemes](#phonemes)
   - [dictionary](#dictionary)
   - [dictrules](#dictrules)
+  - [lowercaseSentence](#lowercaseSentence)
   - [replace](#replace)
+  - [spellingStress](#spellingStress)
+  - [stressOpt](#stressopt)
   - [stressRule](#stressrule)
   - [stressLength](#stresslength)
   - [stressAdd](#stressadd)
@@ -59,7 +64,7 @@ without the need to specify a voice.
 
 	name <name>
 
-A mandatory name given to this voice.
+A mandatory name given to this voice. Should be single word.
 
 ### language
 
@@ -335,6 +340,22 @@ vowel and the next start with a vowel.
 
 ## Language Attributes
 
+### brackets
+
+	brackets <value>
+
+Default value: 4
+
+Increases the pause when reading brackets. Example: "Pause (with brackets)".
+
+### bracketsAnnounced
+
+	bracketsAnnounced <value>
+
+Default value: 2
+
+Increases the pause when reading brackets when --punct is set to read bracket names. Example: "Pause (with brackets)".
+
 ### phonemes
 
 	phonemes <name>
@@ -367,6 +388,16 @@ language dictionary. They apply to rules in the language's `*_rules`
 dictionary file and also its `*_list` exceptions list. See
 [Text to Phoneme Translation](dictionary.md#conditional-rules).
 
+### lowercaseSentence
+
+	lowercaseSentence <no arguments>
+
+By default, a sentence end is detected if a period `.` is followed by an uppercase letter.
+When lowercaseSentence is set, a period followed by a lowercase letter is also handled as end of sentence.
+
+Note that other conditions, such as abbreviations, might override this setting.
+
+
 ### replace
 
 	replace <flags> <phoneme> <replacement phoneme>
@@ -388,14 +419,26 @@ e.g.
 The phoneme mnemonics can be defined for each language, but some are
 listed in [Phonemes](phonemes.md).
 
+### spellingStress
+
+	spellingStress
+
+When set, stress first letter when reading abbreviations.
+
+### stressOpt
+
+	stressOpt <list of rule numbers>
+
+Gives a list of stress options which are applied for this
+language. (values are defined as bit numbers starting with "S_*" in [translate.h](../src/libespeak-ng/translate.h))
+
 ### stressRule
 
-	stressRule <4 integer values>
+	stressRule <3 integer values>
 
-Four integer parameters. These correspond to:
+Three integer parameters. These correspond to:
 
 1. langopts->stress_rule (values in [translate.h](../src/libespeak-ng/translate.h))
-2. langopts->stress_flags
 3. langopts->unstressed_wd1 (stress for $u word of 1 syllable)
 4. langopts->unstressed_wd2 (stress for $u word of >1 syllable) 
 
@@ -428,6 +471,9 @@ vowels in stressed and unstressed syllables.
 Eight integer parameters. These are added to the voice's corresponding
 `stressLength` values. They are used in the voice variant files in
 `espeak-ng-data/voices/!v` to give some variety. Negative values may be used.
+
+Note that setting `stressLength` after `stressAdd`  will overwrite this value.
+`stressLength` must be set before `stressAdd`.
 
 ### stressAmp
 

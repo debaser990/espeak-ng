@@ -31,14 +31,12 @@ android/res/raw/espeakdata_version
 local.properties
 
 # android gradle output:
-
-gradle/
-gradlew
-
+.cxx
 .gradle/
 .idea/
 build/
 *.iml
+!gradlew.bat
 
 # emscripten output:
 a.out
@@ -109,20 +107,35 @@ tests/*.check
 !tests/language-replace.test
 !tests/ssml.test
 !tests/translate.test
+!tests/variants.test
 !tests/non-executable-files-with-executable-bit.test
 !tests/bom.test
 !tests/klatt.test
 !tests/mbrola.test
+!tests/dictionary.test
+!tests/cmd_options.test
+!tests/windows-data.test
+!tests/windows-installer.test
+!tests/voices.test
 
 espeak-ng.pc
 
 espeak-ng-*.tar.gz
 espeak-ng-*.*/
 
+# /tests/fuzzing/
+/tests/fuzzing/crash-*
+/tests/fuzzing/oom-*
+/tests/fuzzing/leak-*
+/tests/fuzzing/fuzz-*.log
+/tests/fuzzing/*.profdata
+/tests/fuzzing/*.profraw
+/tests/fuzzing/.deps/*.Po
+/tests/fuzzing/.dirstamp
+!tests/fuzzing/CORPUS*/*.txt
 # Windows builds
 
 src/pcaudiolib/
-
 !src/windows/config.h
 
 *.obj
@@ -151,6 +164,8 @@ src/pcaudiolib/
 *.wixobj
 *.wixpdb
 *.cab
+/src/windows/Release
+/src/windows/x64
 
 *.tmp
 
@@ -188,8 +203,8 @@ dictsource/*_extra
 dictsource/dict_log
 dictsource/dict_phonemes
 dictsource/ru_listx
-dictsource/zh_listx
-dictsource/zhy_listx
+dictsource/cmn_listx
+dictsource/yue_listx
 
 phsource/compile_prog_log
 phsource/compile_report

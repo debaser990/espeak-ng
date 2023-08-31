@@ -50,7 +50,7 @@ pitch 43 120
 ## El quinto número en la línea de tono, 2000, es la frecuencia de agudos. El sexto número es el volumen de la frecuencia de agudos. 0 es el mínimo y 255 es el máximo.
 ##  Notará que las 3 frecuencias están configuradas en 255.
 ###La siguiente línea es una opción que puedes cambiar.
-tone 100 255  1200 255 1500 255
+tone 100 255 1200 255 1500 255
 echo 8 10000
 roughness 3
 breath 20 5 2 10 5 0 27 100
@@ -61,4 +61,5 @@ stressLength 0 1 2 3 4 5 6 7
 stressAdd 250 350 700 500 450 290 100 225
 stressAmp 16 16 24 24 16 16 20 24
 ##Este archivo no incluye todas las configuraciones que se pueden usar para modificar una voz E Speak. Su objetivo es familiarizarlo con lo que hace la configuración.
-##Sin envargo puedes visitar la página http://espeak.sourceforge.net/voices.html y consultar más información acerca de cómo agregar o cambiar otras configuraciones. Espero que te haya servido esta ayuda, y que te hayas divertido.
+##Sin envargo puedes visitar la página http://espeak.sourceforge.net/voices.html y consultar más información acerca de cómo agregar o cambiar otras configuraciones.
+## Espero que te haya servido esta ayuda, y que te hayas divertido.
