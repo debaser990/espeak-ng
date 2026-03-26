@@ -26,6 +26,10 @@ E.g. for Debian-like distribution (e.g. Ubuntu, Mint, etc.) execute command:
 For RedHat-like distribution (e.g. CentOS, Fedora, etc.) execute command:
 
     sudo yum install espeak-ng
+    
+For ArchLinux-like distribution (e.g. SteamOS, EndeavourOS, etc.) execute command:
+
+    sudo pacman -S espeak-ng
 
 ### Windows
 
@@ -50,11 +54,9 @@ Then usual workaround with sending data standard output and piping it to `aplay`
 
 But, when `pcaudiolib` is compiled and installed and espeak-ng is reconfigured, recompiled and reinstalled again, simple call works properly.
 
-If espeak-ng is built from source code, ensure that `libpulse-dev` package is installed, or [pcaudiolib](https://github.com/espeak-ng/pcaudiolib) built and installed and, when do `./configure` command, check that status says:
+If espeak-ng is built from source code, ensure that `libpulse-dev` package is installed, or [pcaudiolib](https://github.com/espeak-ng/pcaudiolib) built and installed, and check cmake output shows pcaudiolib was found.
 
-    PulseAudio support:            yes
-
-Then recmpile and install espeak-ng aganin.
+Then recompile and install espeak-ng again.
 
 
 ## Problems with pulseaudio
@@ -69,10 +71,9 @@ If Linux distribution doesn't support pulseaudio sound system (or it doesn't wor
 2. Reboot
 
        sudo reboot
-3. Recompile espeak-ng with ` --with-pulseaudio=no` support:
+3. Recompile espeak-ng without pcaudiolib (pulseaudio) support:
 
-       ./autogen.sh
-       ./configure --prefix=/usr --with-pulseaudio=no
-       make -B
-       sudo make install
+       cmake -Bbuild -DCMAKE_INSTALL_PREFIX=/usr -DUSE_LIBPCAUDIO=OFF
+       cmake --build build
+       sudo cmake --install build
 

@@ -572,6 +572,8 @@ static int
 _test_espeak_ng_phoneme_events_cb(short *samples, int num_samples, espeak_EVENT *events) {
 	char *out = events->user_data;
 	size_t offset;
+	(void) samples;
+	(void) num_samples;
 	for (espeak_EVENT *e = events; e->type != 0; e++) {
 		if (e->type == espeakEVENT_PHONEME) {
 			if (out[0] == 0) offset = 0;
@@ -608,9 +610,9 @@ test_espeak_ng_phoneme_events(int enabled, int ipa) {
 	TEST_ASSERT(espeak_ng_Synchronize() == ENS_OK);
 	if (enabled) {
 		if (ipa) {
-			TEST_ASSERT(strncmp(phoneme_events, "t ɛ s t  ", sizeof(phoneme_events)) == 0);
+			TEST_ASSERT(strncmp(phoneme_events, "t ˈɛ s t  ", sizeof(phoneme_events)) == 0);
 		} else {
-			TEST_ASSERT(strncmp(phoneme_events, "t E s t _: _", sizeof(phoneme_events)) == 0);
+			TEST_ASSERT(strncmp(phoneme_events, "t 'E s t _: _", sizeof(phoneme_events)) == 0);
 		}
 	} else {
 		TEST_ASSERT(phoneme_events[0] == 0);

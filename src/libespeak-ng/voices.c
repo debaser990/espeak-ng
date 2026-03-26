@@ -80,6 +80,12 @@ static const char variants_male[N_VOICE_VARIANTS] = { 1, 2, 3, 4, 5, 6, 0 };
 static const char variants_female[N_VOICE_VARIANTS] = { 11, 12, 13, 14, 0 };
 static const char *const variant_lists[3] = { variants_either, variants_male, variants_female };
 
+#ifdef _WIN32
+#define MB_PREFIX "mb\\"
+#else
+#define MB_PREFIX "mb/"
+#endif
+
 static voice_t voicedata;
 voice_t *voice = &voicedata;
 
@@ -442,6 +448,10 @@ voice_t *LoadVoice(const char *vname, int control)
 		MAKE_MEM_UNDEFINED(&voice_languages, sizeof(voice_languages));
 	}
 
+	if ((vname == NULL || vname[0] == 0) && !(control & 8)) {
+		return NULL;
+	}
+
 	strncpy0(voicename, vname, sizeof(voicename));
 	if (control & 0x10) {
 		strcpy(buf, vname);
@@ -670,12 +680,20 @@ voice_t *LoadVoice(const char *vname, int control)
                     voice->samplerate = srate;
             }
                 break;
+#else
+            case V_MBROLA:
+                fprintf(stderr, "espeak-ng was built without mbrola support\n");
+                break;
 #endif
 #if USE_KLATT
             case V_KLATT:
                 voice->klattv[0] = 1; // default source: IMPULSIVE
                 Read8Numbers(p, voice->klattv);
                 voice->klattv[KLATT_Kopen] -= 40;
+                break;
+#else
+            case V_KLATT:
+                fprintf(stderr, "espeak-ng was built without klatt support\n");
                 break;
 #endif
             case V_FAST:
@@ -702,14 +720,14 @@ voice_t *LoadVoice(const char *vname, int control)
 
 	if (!tone_only) {
 		if (!!(control & 8/*compiling phonemes*/)) {
-                        /* Set by espeak_ng_CompilePhonemeDataPath when it
-                         * calls LoadVoice("", 8) to set up a dummy(?) voice.
-                         * As phontab may not yet exist this avoids the spurious
-                         * error message and guarantees consistent results by
-                         * not actually reading a potentially bogus phontab...
-                         */
-                        ix = 0;
-                } else if ((ix = SelectPhonemeTableName(phonemes_name)) < 0) {
+			/* Set by espeak_ng_CompilePhonemeDataPath when it
+				* calls LoadVoice("", 8) to set up a dummy(?) voice.
+				* As phontab may not yet exist this avoids the spurious
+				* error message and guarantees consistent results by
+				* not actually reading a potentially bogus phontab...
+				*/
+			ix = 0;
+		} else if ((ix = SelectPhonemeTableName(phonemes_name)) < 0) {
 			fprintf(stderr, "Unknown phoneme table: '%s'\n", phonemes_name);
 			ix = 0;
 		}
@@ -1106,7 +1124,8 @@ char const *SelectVoice(espeak_VOICE *voice_select, int *found)
 	}
 
 	// select and sort voices for the required language
-	nv = SetVoiceScores(&voice_select2, voices, 0);
+	nv = SetVoiceScores(&voice_select2, voices,
+			voice_select2.identifier && strncmp(voice_select2.identifier, "mb/", 3) == 0 ? 1 : 0);
 
 	if (nv == 0) {
 		// no matching voice, choose the default
@@ -1391,7 +1410,7 @@ ESPEAK_API const espeak_VOICE **espeak_ListVoices(espeak_VOICE *voice_spec)
 		j = 0;
 		for (ix = 0; (v = voices_list[ix]) != NULL; ix++) {
 			if ((v->languages[0] != 0) && (strcmp(&v->languages[1], "variant") != 0)
-			    && (memcmp(v->identifier, "mb/", 3) != 0))
+			    && (memcmp(v->identifier, MB_PREFIX, 3) != 0))
 				voices[j++] = v;
 		}
 		voices[j] = NULL;

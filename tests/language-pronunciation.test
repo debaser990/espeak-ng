@@ -56,10 +56,9 @@ dZ'ader 'at.Ok k'O*a h'OtS#e
 t,ader pr'aj 'O*d#ek,Oi b'aNlad,eSi n'agO*,ik" "মালয়েশিয়ায় অবৈধ শ্রমিকদের বিরুদ্ধে চলমান 'মেগা-থ্রি' অভিযানে সে দেশে শত শত অভিবাসীকে আটক করেছে সে দেশের ইমিগ্রেশন পুলিশ। যাদের আটক করা হয়েছে, তাদের প্রায় অর্ধেকই বাংলাদেশী নাগরিক।" "Beng"
 test_phon bs "l^'ub&znI f'En^eRdZ,Ij& tS'adZ;&vog l'its& x'otS;E d'a m'i p'ok&ZE St'os" "Љубазни фењерџија чађавог лица хоће да ми покаже штос." "Cyrl"
 test_phon bs "l^'ub&znI f'En^eRdZ,Ij& tS'adZ;&vog l'its& x'otS;E d'a m'i p'ok&ZE St'os" "Ljubazni fenjerdžija čađavog lica hoće da mi pokaže štos." "Latn"
-test_phon ca "d'ona# a#m'o* k'E s@**,as f'Elis
-a#jS;'O
-ill'us k'ompa#n^ Q@nj'ut
-Z;'a es Un l^w'it *R'EtUl Bla#B'is D'onz@_:_: k'e v#,e D,oBl@'ak" "Dóna amor que seràs feliç. Això, il·lús company geniüt, ja és un lluït rètol blavís d’onze kWh." "Latn"
+test_phon ca "d'on@ @m'oR k@ s@**'as f@l'is
+si n'o @nz @nt@n'Em p@** l^@Ngw'adZ@
+@nt@Ng'Emnus p@** @m'oR" "Dóna amor que seràs feliç. Si no ens entenem per llenguatge, entenguem-nos per amor." "Latn"
 test_phon cs "n'exc j'iS hR^'i:Sne: s'aksof,oni J'a:blu: R'ozezv,utSi: s'i:n^ 'u:Jesn,i:mi t'o:ni v'aldzu
 t'aNga_! a kv'itskstepu
 pR^'i:liZ Zl'ucoUtSki: k'u:n^ 'u:pjel J'a:belske: 'o:di" "Nechť již hříšné saxofony ďáblů rozezvučí síň úděsnými tóny waltzu, tanga a quickstepu. Příliš žluťoučký kůň úpěl ďábelské ódy." "Latn"
@@ -71,6 +70,12 @@ test_phon de "v'Ikto:r j'A:kt tsv'Wlf b'OkskEmpf3 kv'e:r_:_: _|,y:b3 de:n gr'o:s
 h'aItsWlr,yksto:s,abdEmpf,UN" "Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Heizölrückstoßabdämpfung." "Latn"
 test_phon el "ks,escep'azo t'im bz,ixofT'ora vD,eliQm'i;a" "Ξεσκεπάζω τὴν ψυχοφθόρα βδελυγμία." "Grek"
 test_phon en "D@ kw'Ik br'aUn f'0ks dZ'Vmps ,oUv3 D@ l'eIzi d'0g" "The quick brown fox jumps over the lazy dog" "Latn"
+test_phon en "h'i@3rIN m'i: b'oU
+DI2; 'aZ3 Tr'VS k'O:z
+'e@ j'O@ dZ'OIf@l 'A@ri:;@
+aI v'aU
+ju: w'0nt g'Ud tS'A:
+'EseI pu:'3:" "𐑣𐑽𐑦𐑙 𐑥𐑰 𐑚𐑴, 𐑞 𐑨𐑠𐑼 𐑔𐑮𐑳𐑖 𐑒𐑷𐑟. 𐑺 𐑘𐑹 𐑡𐑶𐑓𐑩𐑤 𐑸𐑾, 𐑲 𐑝𐑬, 𐑿 𐑢𐑪𐑯𐑑 𐑜𐑫𐑛 𐑗𐑭. 𐑧𐑕𐑱 𐑐𐑵'𐑻!." "Shaw"
 test_phon eo ",eble tS'i;u kv'azaUd'etsa f,uSxoR'aZo dZoI'igos homt'ipon
 ,exoS'andZo tS,i;uZ'aUde
 p@-*'eskaU f@-*'eSa tS'exa mandZ'aZo" "Eble ĉiu kvazaŭ-deca fuŝĥoraĵo ĝojigos homtipon. Eĥoŝanĝo ĉiuĵaŭde, preskaŭ freŝa ĉeĥa manĝaĵo." "Latn"
@@ -210,12 +215,12 @@ naN ta d'ota k'u Ras'oN_:_: i k'u kons'enSi_:_: i naN mest'eR komp'oRta naN deN 
 test_phon pl "m'E~Zny b'On^ts;
 xR'On^ p'uwk tf'uj_! i S'ES;ts; fl'ak
 z'aZuwdz; g'En^S;lO~_ j'aZ;n^" "Mężny bądź, chroń pułk twój i sześć flag. Zażółć gęślą jaźń." "Latn"
-test_phon pt "lw'iz ,&*@-gu'i; ,a: Z'ulj& ky_:_: bR&s'o~js#
+test_phon pt "lw'iz ,&*@-gu'i; ,a: Z'ulj& ky_:_: b@-*&s'oI~S
 f'E
 S'a
 'OksidU
-p'or-
-z'&~Ng&U~_:_: ,E*&U~ p,&l'avR&Z dU p,u*@-tug'es#" "Luís argüia à Júlia que «brações, fé, chá, óxido, pôr, zângão» eram palavras do português." "Latn"
+p'o*
+z'&~Ng&U~_:_: ,E*&U~ p,&l'av@-*&Z dU p,u*@-tug'eS" "Luís argüia à Júlia que «brações, fé, chá, óxido, pôr, zângão» eram palavras do português." "Latn"
 test_phon qya ",aInul'Indal,E ald'INga aNk'alIm,a and'u:RIl at'akwE k,alak'IRja k,uIvI;'e:nEn ,EaR'EndIl El'EndIl ,ElEnt'a:RI; El'EssaR 'ENkwI;,E E'OnwE ER'EssE,a h,ElkaR'aksE w#'Esta C'aRmEn Is'IlduR l'ap:a m'axtan nam'a:RI;,E n'at:IR,a n,u:mEn'o:RE 'OROm,E Ot'OkwE pEl'Ek:O pEl'o:RI s'aUROn tan'IkwEt,Il t,Elum'ECtaR t'ulkas tuR'ambaR und'o:mI;,El ut'umnO" "Ainulindalë aldinga ancalima Andúril ataquë Calacirya Cuiviénen Eärendil Elendil Elentári Elessar enquië Eönwe Eressëa Helcaraxë hwesta Hyarmen Isildur lappa Mahtan Namárië nattira Númenórë Orome otoquë pelecco Pelóri Sauron Taniquetil Telumehtar Tulkas Turambar Undómiel Utumno" "Quenya"
 test_phon ro "m,uzikol'og@_! yn b'eZ v'ynd wh'iski Si tekw'ila
 p@-*'ets f'iks" "Muzicologă în bej vând whisky și tequila, preț fix." "Latn"
